@@ -2,7 +2,7 @@ package com.example.gobiteseller.utils
 
 
 object AppConstants {
-    const val CUSTOM_BASE_URL="https://food-backend-ssn.herokuapp.com/"
+    const val CUSTOM_BASE_URL="http://192.168.29.60/admin/"
     const val PREFS_AUTH_TOKEN = "auth_token"
     const val PREFS_LOGIN_PREFS = "loginPrefs"
     const val PREFS_CUSTOMER = "customer"

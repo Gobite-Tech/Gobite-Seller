@@ -2,15 +2,30 @@ package com.example.gobiteseller.data.retrofit
 
 import com.example.gobiteseller.data.model.ConfigurationModel
 import com.example.gobiteseller.data.model.ItemModel
+import com.example.gobiteseller.data.model.LoginRequest
+import com.example.gobiteseller.data.model.LoginResponse
 import com.example.gobiteseller.data.model.OrderItemListModel
 import com.example.gobiteseller.data.model.OrderModel
 import com.example.gobiteseller.data.model.ShopConfigurationModel
+import com.example.gobiteseller.data.model.SignUpRequest
+import com.example.gobiteseller.data.model.SignUpResponse
 import com.example.gobiteseller.data.model.UserModel
 import com.example.gobiteseller.data.model.UserShopListModel
+import com.example.gobiteseller.data.model.otpRequest
+import com.example.gobiteseller.data.model.otpResponse
 import retrofit2.Response
 import retrofit2.http.*
 
 interface CustomApi  {
+
+    @POST("v1/auth/signup")
+    suspend fun otpNew(@Body otpReq:otpRequest):Response<otpResponse>
+
+    @POST("v1/auth/login")
+    suspend fun loginNew(@Body loginModel:LoginRequest):Response<LoginResponse>
+
+    @POST("v1/auth/otp")
+    suspend fun signUpNew(@Body signupModel:SignUpRequest):Response<SignUpResponse>
 
     // user repository
     @POST("/user/seller")

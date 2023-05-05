@@ -26,9 +26,9 @@ class AuthInterceptor(val context: Context, val preferences: PreferencesHelper) 
                 req.newBuilder().build()
             } else if (!whiteListedEndpoints.contains(req.url().encodedPath())) {
                 req.newBuilder()
-                    .addHeader("oauth_id", preferences.oauthId)
-                    .addHeader("id", preferences.id.toString())
-                    .addHeader("role", preferences.role)
+//                    .addHeader("oauth_id", preferences.oauthId)
+//                    .addHeader("id", preferences.id.toString())
+//                    .addHeader("role", preferences.role)
                     .build()
             } else {
                 req.newBuilder().build()

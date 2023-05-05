@@ -1,6 +1,8 @@
 package com.example.gobiteseller.di
 
 
+import com.example.gobiteseller.ui.login.LoginViewModel
+import com.example.gobiteseller.ui.signup.SignUpViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -20,8 +22,9 @@ val viewModelModule = module {
 //    viewModel { OrderHistoryViewModel(get()) }
 //    viewModel { ProfileViewModel(get(),get()) }
 //    viewModel { OTPViewModel(get()) }
-//    viewModel { LoginViewModel(get()) }
+    viewModel { LoginViewModel(get()) }
 //    viewModel { ShopProfileViewModel(get()) }
 //    viewModel { OrderDetailViewModel(get()) }
 //    viewModel { ContributorViewModel() }
+    viewModel { SignUpViewModel(get()) }
 }

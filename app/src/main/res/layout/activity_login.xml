@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.food.ordering.zinger.ui.login.LoginActivity">
+        tools:context="com.example.gobiteseller.ui.login.LoginActivity">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -55,6 +55,33 @@
             android:background="@color/colorAccent"
             android:orientation="vertical"
             android:padding="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center|start"
+                android:paddingTop="3dp"
+                android:text="Email Address"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:background="@null"
+                android:fontFamily="@font/poppins_semibold"
+                android:hint="Enter email address"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textColorHint="#000000"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -92,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Send OTP"
+                android:text="Login"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:backgroundTint="@android:color/black" />
