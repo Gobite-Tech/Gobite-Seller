@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Log.e
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -68,11 +69,13 @@ class SignUpActivity : AppCompatActivity() {
                             )
                             progressDialog.dismiss()
                             val authToken = OtpResult.data.token
+                            e("token:",authToken)
                             preferencesHelper.oauthId = authToken
 
-                            startActivity(Intent(applicationContext, LoginActivity::class.java))
-                            finish()
 
+                            Toast.makeText(applicationContext,"Welcome!!",Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(applicationContext, HomeActivity::class.java))
+                            finish()
 
                         } else {
                             progressDialog.dismiss()
@@ -119,7 +122,7 @@ class SignUpActivity : AppCompatActivity() {
                                 " Result - ${resource.data} and ${resource.data.success} and ${resource.data.message}"
                             )
 
-                            preferencesHelper.oauthId = loginresult.data.auth_token
+//                            preferencesHelper.oauthId = loginresult.data.auth_token
 
                             val name= findViewById<EditText>(R.id.edit_name).text.toString()
                             viewModel.otp(otpRequest(loginresult.data.auth_token,name,"769036","12345678","12345678"))

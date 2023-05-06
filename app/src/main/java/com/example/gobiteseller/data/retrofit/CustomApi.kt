@@ -7,6 +7,7 @@ import com.example.gobiteseller.data.model.LoginResponse
 import com.example.gobiteseller.data.model.OrderItemListModel
 import com.example.gobiteseller.data.model.OrderModel
 import com.example.gobiteseller.data.model.ShopConfigurationModel
+import com.example.gobiteseller.data.model.Shops
 import com.example.gobiteseller.data.model.SignUpRequest
 import com.example.gobiteseller.data.model.SignUpResponse
 import com.example.gobiteseller.data.model.UserModel
@@ -18,6 +19,10 @@ import retrofit2.http.*
 
 interface CustomApi  {
 
+    //new stuff
+    @GET("v1/shop/new")
+    suspend fun getShopNew():Response<Shops>
+
     @POST("v1/auth/signup")
     suspend fun otpNew(@Body otpReq:otpRequest):Response<otpResponse>
 
@@ -26,6 +31,9 @@ interface CustomApi  {
 
     @POST("v1/auth/otp")
     suspend fun signUpNew(@Body signupModel:SignUpRequest):Response<SignUpResponse>
+
+
+    //old stuff
 
     // user repository
     @POST("/user/seller")

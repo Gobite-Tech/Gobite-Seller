@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
+import android.util.Log.e
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -32,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        preferencesHelper.oauthId="abc"
 
         initView()
         setObservers()
@@ -197,6 +199,7 @@ class LoginActivity : AppCompatActivity() {
                             )
 
                             preferencesHelper.oauthId = loginresult.data.token
+                            e("lgn token:", preferencesHelper.oauthId!!)
 
                             Toast.makeText(applicationContext,"Welcome!!",Toast.LENGTH_SHORT).show()
                             startActivity(Intent(applicationContext, HomeActivity::class.java))

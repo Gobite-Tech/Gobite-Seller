@@ -26,6 +26,7 @@ class AuthInterceptor(val context: Context, val preferences: PreferencesHelper) 
                 req.newBuilder().build()
             } else if (!whiteListedEndpoints.contains(req.url().encodedPath())) {
                 req.newBuilder()
+                    .addHeader("Authorization", "Bearer ${preferences.oauthId}")
 //                    .addHeader("oauth_id", preferences.oauthId)
 //                    .addHeader("id", preferences.id.toString())
 //                    .addHeader("role", preferences.role)
@@ -44,8 +45,8 @@ class AuthInterceptor(val context: Context, val preferences: PreferencesHelper) 
                         AppConstants.NOTIFICATION_TOPIC_SHOP_ZINGER + it.shopModel.id
                     );
             }
-            FirebaseMessaging.getInstance()
-                .unsubscribeFromTopic(AppConstants.NOTIFICATION_TOPIC_GLOBAL);
+//            FirebaseMessaging.getInstance()
+//                .unsubscribeFromTopic(AppConstants.NOTIFICATION_TOPIC_GLOBAL);
             preferences.clearPreferences()
             val intent = Intent(context, LoginActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 
+
 }
 
 android {
@@ -29,6 +30,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'CUSTOM_BASE_URL', '"https://food-backend-ssn.herokuapp.com/"'
         }
+    }
+    buildFeatures {
+        viewBinding true
     }
 
     dataBinding {
