@@ -1,9 +1,15 @@
 package com.example.gobiteseller.data.retrofit
 
+import com.example.gobiteseller.data.model.AddItemRequest
+import com.example.gobiteseller.data.model.AddItemResponse
+import com.example.gobiteseller.data.model.AddVariant
 import com.example.gobiteseller.data.model.ConfigurationModel
+import com.example.gobiteseller.data.model.DeleteRequest
+import com.example.gobiteseller.data.model.DeleteResponse
 import com.example.gobiteseller.data.model.ItemModel
 import com.example.gobiteseller.data.model.LoginRequest
 import com.example.gobiteseller.data.model.LoginResponse
+import com.example.gobiteseller.data.model.MenuModel
 import com.example.gobiteseller.data.model.OrderItemListModel
 import com.example.gobiteseller.data.model.OrderModel
 import com.example.gobiteseller.data.model.ShopConfigurationModel
@@ -12,6 +18,7 @@ import com.example.gobiteseller.data.model.SignUpRequest
 import com.example.gobiteseller.data.model.SignUpResponse
 import com.example.gobiteseller.data.model.UserModel
 import com.example.gobiteseller.data.model.UserShopListModel
+import com.example.gobiteseller.data.model.Variant
 import com.example.gobiteseller.data.model.otpRequest
 import com.example.gobiteseller.data.model.otpResponse
 import retrofit2.Response
@@ -20,6 +27,22 @@ import retrofit2.http.*
 interface CustomApi  {
 
     //new stuff
+
+    @POST("v1/shop/item/{itemId}/variant")
+    suspend fun addVariant(@Path("itemId") itemId: String,@Body addVariantRequest: AddVariant):Response<AddItemResponse>
+
+    @POST("v1/shop/item/delete")
+    suspend fun deleteItem(@Body deleteRequest: DeleteRequest): Response<DeleteResponse>
+
+    @PUT("v1/shop/item/{itemId}")
+    suspend fun updateItemNew(@Path("itemId") itemId: String,@Body addItemRequest: AddItemRequest):Response<AddItemResponse>
+
+    @POST("v1/shop/item")
+    suspend fun addItemNew(@Body addItemRequest: AddItemRequest):Response<AddItemResponse>
+
+    @GET("v1/shop/item/list")
+    suspend fun getMenuNew():Response<MenuModel>
+
     @GET("v1/shop/new")
     suspend fun getShopNew():Response<Shops>
 
@@ -62,8 +85,7 @@ interface CustomApi  {
     @PATCH("/menu")
     suspend fun updateItem(@Body item: List<ItemModel>): Response<String>
 
-    @DELETE("/menu/delete/{itemId}")
-    suspend fun deleteItem(@Path("itemId") itemId: Int): Response<String>
+
 
     @DELETE("/menu/undelete/{itemId}")
     suspend fun unDeleteItem(@Path("itemId") itemId: Int): Response<String>
