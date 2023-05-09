@@ -5,7 +5,7 @@ data class Shop(
     val avg_serve_time: Int,
     val category: String,
     val closing_time: String,
-    val cover_photos: List<Any>,
+    val cover_photos: List<CoverPhoto>,
     val description: String,
     val email: String,
     val icon: String,

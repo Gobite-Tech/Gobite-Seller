@@ -12,7 +12,9 @@ import com.example.gobiteseller.data.model.LoginResponse
 import com.example.gobiteseller.data.model.MenuModel
 import com.example.gobiteseller.data.model.OrderItemListModel
 import com.example.gobiteseller.data.model.OrderModel
+import com.example.gobiteseller.data.model.Shop
 import com.example.gobiteseller.data.model.ShopConfigurationModel
+import com.example.gobiteseller.data.model.ShopUpdateRequestTemp
 import com.example.gobiteseller.data.model.Shops
 import com.example.gobiteseller.data.model.SignUpRequest
 import com.example.gobiteseller.data.model.SignUpResponse
@@ -27,6 +29,12 @@ import retrofit2.http.*
 interface CustomApi  {
 
     //new stuff
+
+    @GET("v1/shop")
+    suspend fun getShop():Response<Shops>
+
+    @PUT("v1/shop")
+    suspend fun updateShop(@Body shop:ShopUpdateRequestTemp):Response<Shops>
 
     @POST("v1/shop/item/{itemId}/variant")
     suspend fun addVariant(@Path("itemId") itemId: String,@Body addVariantRequest: AddVariant):Response<AddItemResponse>

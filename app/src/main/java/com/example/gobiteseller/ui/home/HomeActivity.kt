@@ -326,7 +326,7 @@ class HomeActivity : AppCompatActivity() {
                         .setTitle("Confirm Sign Out")
                         .setMessage("Are you sure want to sign out?")
                         .setPositiveButton("Yes") { _, _ ->
-                            FirebaseAuth.getInstance().signOut()
+//                            FirebaseAuth.getInstance().signOut()
 //                            preferencesHelper.getShop()?.forEach {
 //                                FirebaseMessaging.getInstance()
 //                                    .unsubscribeFromTopic(
@@ -373,7 +373,10 @@ class HomeActivity : AppCompatActivity() {
         super.onResume()
 
         //todo order wale
+        e("resume","hua")
 
+//        initView()
+        binding.textShopName.text=preferencesHelper.name
         updateHeaderLayoutUI()
     }
 
