@@ -31,6 +31,7 @@ import com.example.gobiteseller.ui.profile.ProfileActivity
 import com.example.gobiteseller.ui.shopProfile.ShopProfileActivity
 import com.example.gobiteseller.ui.signup.SignUpActivity
 import com.example.gobiteseller.utils.AppConstants
+import com.example.gobiteseller.utils.EventBus
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
