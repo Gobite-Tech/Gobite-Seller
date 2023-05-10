@@ -10,8 +10,11 @@ import com.example.gobiteseller.data.model.ItemModel
 import com.example.gobiteseller.data.model.LoginRequest
 import com.example.gobiteseller.data.model.LoginResponse
 import com.example.gobiteseller.data.model.MenuModel
+import com.example.gobiteseller.data.model.OrderByIdModel
+import com.example.gobiteseller.data.model.OrderByShopIdModel
 import com.example.gobiteseller.data.model.OrderItemListModel
 import com.example.gobiteseller.data.model.OrderModel
+import com.example.gobiteseller.data.model.OrderModelNew
 import com.example.gobiteseller.data.model.Shop
 import com.example.gobiteseller.data.model.ShopConfigurationModel
 import com.example.gobiteseller.data.model.ShopUpdateRequestTemp
@@ -101,8 +104,8 @@ interface CustomApi  {
 
     // Order Repository
 
-    @GET("/order/{orderId}")
-    suspend fun getOrderById(@Path("orderId") orderId: Int): Response<OrderItemListModel>
+    @GET("v1/shop/order/{orderId}")
+    suspend fun getOrderById(@Path("orderId") orderId: Int): Response<OrderByIdModel>
 
     @GET("/order/seller/{shopId}/{pageNum}/{pageCnt}")
     suspend fun getOrderByPagination(@Path("shopId") shopId: Int,@Path("pageNum") pageNum: Int,@Path("pageCnt") pageCnt: Int): Response<List<OrderItemListModel>>
@@ -110,11 +113,9 @@ interface CustomApi  {
     @GET("/order/{shopId}/{searchItem}/{pageNum}/{pageCount}")
     suspend fun getOrderBySearchItem(@Path("shopId") shopId: Int, @Path("searchItem") searchItem: String, @Path("pageNum") pageNum: Int, @Path("pageCount") pageCnt: Int): Response<List<OrderItemListModel>>
 
-    @GET("/order/seller/{shopId}")
-    suspend fun getOrderByShopId(@Path("shopId") shopId: Int): Response<List<OrderItemListModel>>
+    @GET("/v1/shop/order")
+    suspend fun getOrderByShopId(): Response<OrderByShopIdModel>
 
-    @PATCH("/order/status")
-    suspend fun updateOrderStatus(@Body order: OrderModel):Response<String>
-
-
+    @PUT("v1/shop/order/{orderid}")
+    suspend fun updateOrderStatus(@Path("orderid") id : String , @Body order: OrderModelNew) : Response<OrderByIdModel>
 }
