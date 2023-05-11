@@ -114,7 +114,7 @@ interface CustomApi  {
     suspend fun getOrderBySearchItem(@Path("shopId") shopId: Int, @Path("searchItem") searchItem: String, @Path("pageNum") pageNum: Int, @Path("pageCount") pageCnt: Int): Response<List<OrderItemListModel>>
 
     @GET("/v1/shop/order")
-    suspend fun getOrderByShopId(): Response<OrderByShopIdModel>
+    suspend fun getOrderByShopId(@Header("Authorization")  authToken:String): Response<OrderByShopIdModel>
 
     @PUT("v1/shop/order/{orderid}")
     suspend fun updateOrderStatus(@Path("orderid") id : String , @Body order: OrderModelNew) : Response<OrderByIdModel>

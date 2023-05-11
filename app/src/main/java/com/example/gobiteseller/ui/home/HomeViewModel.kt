@@ -69,4 +69,27 @@ class HomeViewModel(private val shopRepository: ShopRepository,private val order
     }
 
 
+    //getCurrentshop
+    private var performShopCurrent=MutableLiveData<Resource<Shops>>()
+    val performShopCurrentStatus: LiveData<Resource<Shops>>
+        get() = performShopCurrent
+
+    fun getShopCurrent(){
+        viewModelScope.launch {
+            try {
+                performShopCurrent.value = Resource.loading()
+                val response = shopRepository.getShop()
+                performShopCurrent.value = Resource.success(response.body()!!)
+            }catch (e:Exception){
+                if (e is UnknownHostException) {
+                    performShopCurrent.value = Resource.offlineError()
+                } else {
+                    performShopCurrent.value = Resource.error(e)
+                }
+            }
+        }
+    }
+
+
+
 }

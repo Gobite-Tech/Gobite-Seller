@@ -51,11 +51,11 @@ class OrderViewModel(
     val orderByShopIdResponse: LiveData<Resource<OrderByShopIdModel>>
         get() = orderByShopId
 
-    fun getOrderByShopId(shopId: Int) {
+    fun getOrderByShopId(authID: String) {
         viewModelScope.launch {
             try {
                 orderByShopId.value = Resource.loading()
-                val response = orderRepository.getOrderByShopId()
+                val response = orderRepository.getOrderByShopId(authID)
                 if (response.isSuccessful) {
                     orderByShopId.value = Resource.success(response.body()!!)
                     preferencesHelper.orderStatusChanged = false

@@ -41,12 +41,12 @@ fun provideOkHttpClient(authInterceptor: AuthInterceptor): OkHttpClient {
         .connectTimeout(60, TimeUnit.SECONDS)
         .readTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(60, TimeUnit.SECONDS)
-        .addInterceptor(authInterceptor)
+        .addNetworkInterceptor(authInterceptor)
 
-    if (BuildConfig.DEBUG) {
+
         val requestInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
         builder.addNetworkInterceptor(requestInterceptor)
-    }
+
     return builder.build()
 }
 

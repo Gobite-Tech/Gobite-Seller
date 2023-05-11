@@ -214,21 +214,83 @@ class HomeActivity : AppCompatActivity() {
                                 "shop",
                                 " Result - ${resource.data} and ${resource.data.success} and ${resource.data.message}"
                             )
-                            preferencesHelper.currentShop =
-                                shopResult.data.shop.id
 
-                            preferencesHelper.name=shopResult.data.shop.name
-                            preferencesHelper.id=shopResult.data.shop.id
-                            preferencesHelper.email=shopResult.data.shop.email
-                            preferencesHelper.mobile=shopResult.data.shop.mobile
-                            mShopDetails=shopResult.data.shop
+                            if(shopResult.data.shop.name !=null){
+                                preferencesHelper.currentShop =
+                                    shopResult.data.shop.id
 
-                            e("preferencesHelper.name",preferencesHelper.currentShop.toString())
+                                preferencesHelper.name=shopResult.data.shop.name
+                                preferencesHelper.id=shopResult.data.shop.id
+                                preferencesHelper.email=shopResult.data.shop.email
+                                preferencesHelper.mobile=shopResult.data.shop.mobile
+                                mShopDetails=shopResult.data.shop
 
-                            progressDialog.dismiss()
+                                e("preferencesHelper.name",preferencesHelper.currentShop.toString())
 
-                            initView()
+                                progressDialog.dismiss()
 
+                                initView()
+                            }else{
+                                homeViewModel.getShopCurrent()
+                            }
+
+
+                        } else {
+                            Toast.makeText(
+                                applicationContext,
+                                "Something went wrong shop khali",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                    Resource.Status.OFFLINE_ERROR -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(
+                            applicationContext,
+                            "No Internet Connection",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    Resource.Status.ERROR -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(applicationContext, "shop not found\n Sign Up first", Toast.LENGTH_SHORT).show()
+                        val intent= Intent(this, SignUpActivity::class.java)
+                        startActivity(intent)
+                    }
+                    Resource.Status.LOADING -> {
+                        progressDialog.setMessage("Logging in...")
+                        progressDialog.show()
+                    }
+                    else -> {}
+                }
+            }
+        })
+
+        homeViewModel.performShopCurrentStatus.observe(this, Observer { resource ->
+            if (resource != null) {
+                when (resource.status) {
+                    Resource.Status.SUCCESS -> {
+                        if (resource.data != null) {
+                            val shopResult = resource.data
+
+                            Log.e(
+                                "shop",
+                                " Result - ${resource.data} and ${resource.data.success} and ${resource.data.message}"
+                            )
+                                preferencesHelper.currentShop =
+                                    shopResult.data.shop.id
+
+                                preferencesHelper.name=shopResult.data.shop.name
+                                preferencesHelper.id=shopResult.data.shop.id
+                                preferencesHelper.email=shopResult.data.shop.email
+                                preferencesHelper.mobile=shopResult.data.shop.mobile
+                                mShopDetails=shopResult.data.shop
+
+                                e("preferencesHelper.name",preferencesHelper.currentShop.toString())
+
+                                progressDialog.dismiss()
+
+                                initView()
 
 
                         } else {

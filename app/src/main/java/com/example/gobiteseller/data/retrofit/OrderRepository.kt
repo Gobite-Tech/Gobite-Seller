@@ -10,7 +10,7 @@ class OrderRepository(private val retrofit: Retrofit) {
 
     suspend fun getOrderById(orderId: Int) = service.getOrderById(orderId)
 
-    suspend fun getOrderByShopId() = service.getOrderByShopId()
+    suspend fun getOrderByShopId(authToken:String) = service.getOrderByShopId(authToken)
 
     suspend fun getOrderByPagination(shopId: Int,pageNum: Int,pageCnt: Int) = service.getOrderByPagination(shopId,pageNum,pageCnt)
 

@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log.e
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -61,11 +62,12 @@ class NewOrdersFragment : Fragment() {
         snackButton.background = null
         snackButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorAccent))
         errorSnackBar.setAction("Try Again") {
-            viewModel.getOrderByShopId(preferencesHelper.currentShop)
+            e("oauthId", "Bearer ${preferencesHelper.oauthId}")
+            viewModel.getOrderByShopId("Bearer "+preferencesHelper.oauthId!!)
         }
         errorSnackBar.dismiss()
         binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.getOrderByShopId(preferencesHelper.currentShop)
+            viewModel.getOrderByShopId("Bearer "+preferencesHelper.oauthId!!)
         }
     }
 
@@ -230,11 +232,11 @@ class NewOrdersFragment : Fragment() {
     private fun showEmptyStateAnimation(){
         binding.swipeRefreshLayout.isRefreshing = false
         binding.layoutStates.visibility = View.GONE
-        binding.animationView.visibility = View.VISIBLE
-        binding.animationView.loop(true)
-        binding.animationView.setAnimation("empty_animation.json")
-        binding.animationView.playAnimation()
-        errorSnackBar.setText("No New Orders available")
+//        binding.animationView.visibility = View.VISIBLE
+//        binding.animationView.loop(true)
+//        binding.animationView.setAnimation("empty_animation.json")
+//        binding.animationView.playAnimation()
+//        errorSnackBar.setText("No New Orders available")
         Handler().postDelayed({ errorSnackBar.show() }, 500)
     }
 
