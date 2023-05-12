@@ -65,7 +65,7 @@ class OrdersAdapter(
 
 
             when (order.order_status) {
-                AppConstants.STATUS.CREATED.name -> {
+                "created" -> {
                     binding.textUpdateStatus.text = "ACCEPT"
                 }
 
@@ -73,16 +73,16 @@ class OrdersAdapter(
                     binding.textUpdateStatus.text = AppConstants.STATUS.BEING_PREPARED.name
                 }
 
-                AppConstants.STATUS.BEING_PREPARED.name -> {
+                "being_prepared" -> {
                     binding.textCancel.visibility = View.INVISIBLE
                     binding.textCancel.isEnabled = false
                     binding.textUpdateStatus.text = "PREPARED"
                 }
 
-                AppConstants.STATUS.PREPARED.name -> {
+                "prepared" -> {
                     binding.textCancel.visibility = View.INVISIBLE
                     binding.textCancel.isEnabled = false
-                    binding.textUpdateStatus.text = "PREPARED"
+                    binding.textUpdateStatus.text = "COMPLETED"
                 }
             }
 

@@ -63,12 +63,13 @@ class NewOrdersFragment : Fragment() {
         snackButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorAccent))
         errorSnackBar.setAction("Try Again") {
             e("oauthId", "Bearer ${preferencesHelper.oauthId}")
-            viewModel.getOrderByShopId("Bearer "+preferencesHelper.oauthId!!)
+            viewModel.getOrderByShopId("Bearer "+PreferencesHelper(requireContext()).oauthId!!)
         }
         errorSnackBar.dismiss()
         binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.getOrderByShopId("Bearer "+preferencesHelper.oauthId!!)
+            viewModel.getOrderByShopId("Bearer "+PreferencesHelper(requireContext()).oauthId!!)
         }
+        viewModel.getOrderByShopId("Bearer "+PreferencesHelper(requireContext()).oauthId!!)
     }
 
     private fun setObservers() {
@@ -82,7 +83,7 @@ class NewOrdersFragment : Fragment() {
                         if (resource.data != null){
                             resource.data.let { it1 ->
                                 it1.data.orders.forEach {
-                                    if (it.order_status == AppConstants.STATUS.PLACED.name){
+                                    if (it.order_status == "created"){
                                         ordersList.add(it)
                                     }
                                 }
@@ -152,7 +153,7 @@ class NewOrdersFragment : Fragment() {
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
                         progressDialog.dismiss()
-                        //viewModel.getOrderByShopId(preferencesHelper.currentShop)
+                        viewModel.getOrderByShopId("Bearer "+PreferencesHelper(requireContext()).oauthId!!)
                     }
 
                     Resource.Status.ERROR -> {
@@ -193,7 +194,7 @@ class NewOrdersFragment : Fragment() {
 
             override fun onUpdateClick(orderItemListModel: OrderX?, position: Int) {
                 val orderModel = OrderModelNew(
-                    AppConstants.STATUS.PLACED.name
+                    "being_prepared"
                 )
                 MaterialAlertDialogBuilder(context!!)
                     .setTitle(getString(R.string.confirm_order_status_update))
@@ -208,7 +209,7 @@ class NewOrdersFragment : Fragment() {
 
             override fun onCancelClick(orderItemListModel: OrderX?, position: Int) {
                 val orderModel = OrderModelNew(
-                    AppConstants.STATUS.CANCELLED.name
+                   "cancelled"
                 )
 
                 MaterialAlertDialogBuilder(context!!)

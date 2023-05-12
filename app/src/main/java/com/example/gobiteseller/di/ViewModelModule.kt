@@ -6,6 +6,7 @@ import com.example.gobiteseller.ui.home.OrderViewModel
 import com.example.gobiteseller.ui.login.LoginViewModel
 import com.example.gobiteseller.ui.menu.MenuViewModel
 import com.example.gobiteseller.ui.menuItem.MenuItemViewModel
+import com.example.gobiteseller.ui.orderHistory.OrderHistoryViewModel
 import com.example.gobiteseller.ui.shopProfile.ShopProfileViewModel
 import com.example.gobiteseller.ui.signup.SignUpViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -23,7 +24,7 @@ val viewModelModule = module {
         )
     }
 //    viewModel { SearchOrderViewModel(get()) }
-//    viewModel { OrderHistoryViewModel(get()) }
+    viewModel { OrderHistoryViewModel(get()) }
 //    viewModel { ProfileViewModel(get(),get()) }
 //    viewModel { OTPViewModel(get()) }
     viewModel { LoginViewModel(get()) }

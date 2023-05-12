@@ -113,7 +113,7 @@ interface CustomApi  {
     @GET("/order/{shopId}/{searchItem}/{pageNum}/{pageCount}")
     suspend fun getOrderBySearchItem(@Path("shopId") shopId: Int, @Path("searchItem") searchItem: String, @Path("pageNum") pageNum: Int, @Path("pageCount") pageCnt: Int): Response<List<OrderItemListModel>>
 
-    @GET("/v1/shop/order")
+    @GET("v1/shop/order")
     suspend fun getOrderByShopId(@Header("Authorization")  authToken:String): Response<OrderByShopIdModel>
 
     @PUT("v1/shop/order/{orderid}")

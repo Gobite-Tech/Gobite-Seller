@@ -234,7 +234,6 @@ class HomeActivity : AppCompatActivity() {
                                 homeViewModel.getShopCurrent()
                             }
 
-
                         } else {
                             Toast.makeText(
                                 applicationContext,
@@ -356,7 +355,7 @@ class HomeActivity : AppCompatActivity() {
             .withCloseOnClick(true)
             .withSelectedItem(-1)
             .addDrawerItems(
-                profileItem,
+//                profileItem,
                 shopProfileItem,
                 ordersItem,
                 menuItem,
@@ -366,9 +365,9 @@ class HomeActivity : AppCompatActivity() {
                 signOutItem
             )
             .withOnDrawerItemClickListener { _, _, drawerItem ->
-                if (profileItem.identifier == drawerItem.identifier) {
-                    startActivity(Intent(applicationContext, ProfileActivity::class.java))
-                }
+//                if (profileItem.identifier == drawerItem.identifier) {
+//                    startActivity(Intent(applicationContext, ProfileActivity::class.java))
+//                }
                 if (shopProfileItem.identifier == drawerItem.identifier) {
                     startActivity(Intent(applicationContext, ShopProfileActivity::class.java))
                 }
