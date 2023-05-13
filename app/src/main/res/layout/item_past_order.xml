@@ -159,13 +159,7 @@
 			</LinearLayout>
 
 
-            <TextView
-                android:id="@+id/text_view_more"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:text="View More"
-                android:textSize="12sp" />
+
 
 
 
@@ -177,7 +171,7 @@
 
 				<TextView
 					android:id="@+id/text_order_status"
-					android:layout_width="wrap_content"
+					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
 					android:drawableStart="@drawable/ic_pending"
@@ -193,18 +187,18 @@
 					android:layout_width="0dp"
 					android:layout_height="1dp"
 					android:layout_weight="1"/>
-				<com.google.android.material.button.MaterialButton
-					android:id="@+id/button_view_order"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="end"
-					android:fontFamily="@font/poppins_semibold"
-					android:text="View Order"
-					android:textSize="12sp"
-					android:visibility="visible"
-					app:backgroundTint="@color/colorAccent"
-					app:cornerRadius="20dp"
-					app:elevation="0dp" />
+<!--				<com.google.android.material.button.MaterialButton-->
+<!--					android:id="@+id/button_view_order"-->
+<!--					android:layout_width="wrap_content"-->
+<!--					android:layout_height="wrap_content"-->
+<!--					android:layout_gravity="end"-->
+<!--					android:fontFamily="@font/poppins_semibold"-->
+<!--					android:text="View Order"-->
+<!--					android:textSize="12sp"-->
+<!--					android:visibility="visible"-->
+<!--					app:backgroundTint="@color/colorAccent"-->
+<!--					app:cornerRadius="20dp"-->
+<!--					app:elevation="0dp" />-->
 
             </LinearLayout>
 

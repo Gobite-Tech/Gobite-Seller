@@ -162,6 +162,122 @@
                         android:src="@drawable/ic_edit" />
                 </RelativeLayout>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center|start"
+                    android:text="Account Holder"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="12sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_account_holder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:hint="eg: account holder name"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        tools:text="account holder name" />
+
+                    <ImageView
+                        android:id="@+id/image_edit_account_holder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="8dp"
+                        android:src="@drawable/ic_edit" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center|start"
+                    android:text="Account ifsc"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="12sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_account_ifsc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:hint="eg: account ifsc"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        tools:text="account_ifsc" />
+
+                    <ImageView
+                        android:id="@+id/image_edit_account_ifsc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="8dp"
+                        android:src="@drawable/ic_edit" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center|start"
+                    android:text="Account Number"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="12sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_account_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:hint="eg: 5637846f3v25"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        tools:text="account_ifsc" />
+
+                    <ImageView
+                        android:id="@+id/image_edit_account_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="8dp"
+                        android:src="@drawable/ic_edit" />
+                </RelativeLayout>
+
+
+
 
 <!--                <TextView-->
 <!--                    android:id="@+id/text_merchant_id"-->

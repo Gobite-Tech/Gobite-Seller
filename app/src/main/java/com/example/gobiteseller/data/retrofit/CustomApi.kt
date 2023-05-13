@@ -105,7 +105,7 @@ interface CustomApi  {
     // Order Repository
 
     @GET("v1/shop/order/{orderId}")
-    suspend fun getOrderById(@Path("orderId") orderId: Int): Response<OrderByIdModel>
+    suspend fun getOrderById(@Path("orderId") orderId: String): Response<OrderByIdModel>
 
     @GET("/order/seller/{shopId}/{pageNum}/{pageCnt}")
     suspend fun getOrderByPagination(@Path("shopId") shopId: Int,@Path("pageNum") pageNum: Int,@Path("pageCnt") pageCnt: Int): Response<List<OrderItemListModel>>

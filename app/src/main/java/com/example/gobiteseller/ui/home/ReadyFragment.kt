@@ -197,9 +197,9 @@ class ReadyFragment : Fragment() {
         println("Order list size " + ordersList.size)
         orderAdapter = OrdersAdapter(ordersList, object : OrdersAdapter.OnItemClickListener {
             override fun onItemClick(orderItemListModel: OrderX?, position: Int) {
-                val intent = Intent(context, OrderDetailActivity::class.java)
-                intent.putExtra(AppConstants.ORDER_DETAIL, Gson().toJson(orderItemListModel))
-                startActivity(intent)
+//                val intent = Intent(context, OrderDetailActivity::class.java)
+//                intent.putExtra(AppConstants.ORDER_DETAIL, Gson().toJson(orderItemListModel))
+//                startActivity(intent)
             }
 
             override fun onUpdateClick(orderItemListModel: OrderX?, position: Int) {

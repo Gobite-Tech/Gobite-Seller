@@ -8,7 +8,7 @@ class OrderRepository(private val retrofit: Retrofit) {
 
     val service =  retrofit.create(CustomApi::class.java)
 
-    suspend fun getOrderById(orderId: Int) = service.getOrderById(orderId)
+    suspend fun getOrderById(orderId: String) = service.getOrderById(orderId)
 
     suspend fun getOrderByShopId(authToken:String) = service.getOrderByShopId(authToken)
 

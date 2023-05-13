@@ -21,29 +21,7 @@ class OrderViewModel(
     private val preferencesHelper: PreferencesHelper
 ) : ViewModel() {
 
-    private val orderByIdRequest = MutableLiveData<Resource<OrderByIdModel>>()
-    val orderByIdResponse: LiveData<Resource<OrderByIdModel>>
-        get() = orderByIdRequest
 
-    fun getOrderById(orderId: Int) {
-        viewModelScope.launch {
-            try {
-                orderByIdRequest.value = Resource.loading()
-                val response = orderRepository.getOrderById(orderId)
-                if (response.isSuccessful)
-                    orderByIdRequest.value = Resource.success(response.body()!!)
-                else {
-                    orderByIdRequest.value = Resource.error(message = response.message())
-                }
-            } catch (e: Exception) {
-                if (e is UnknownHostException) {
-                    orderByIdRequest.value = Resource.offlineError()
-                } else {
-                    orderByIdRequest.value = Resource.error(e)
-                }
-            }
-        }
-    }
 
     /*****************************************************************************/
 

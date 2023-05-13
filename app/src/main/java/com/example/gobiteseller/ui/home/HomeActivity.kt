@@ -89,7 +89,7 @@ class HomeActivity : AppCompatActivity() {
         }else{
             e("updateHeaderLayoutUI",preferencesHelper.name.toString())
             headerLayout.textCustomerName.text = preferencesHelper.name.toString()
-            headerLayout.textEmail.text = preferencesHelper.email.toString()
+//            headerLayout.textEmail.text = preferencesHelper.email.toString()
             val textDrawable = TextDrawable.builder()
                 .buildRound(
                     preferencesHelper.name?.get(0).toString().capitalize(),
