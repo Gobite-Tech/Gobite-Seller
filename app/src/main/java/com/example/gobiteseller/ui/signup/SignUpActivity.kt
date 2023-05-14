@@ -75,6 +75,7 @@ class SignUpActivity : AppCompatActivity() {
 
                             Toast.makeText(applicationContext,"Welcome!!",Toast.LENGTH_SHORT).show()
                             startActivity(Intent(applicationContext, HomeActivity::class.java))
+                            Toast.makeText(this, "please update shop profile \n before taking orders", Toast.LENGTH_LONG).show()
                             finish()
 
                         } else {

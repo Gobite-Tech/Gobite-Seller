@@ -150,14 +150,14 @@ class ShopProfileActivity : AppCompatActivity() {
                 binding.imageEditOpeningTime.visibility = View.GONE
                 binding.imageEditClosingTime.visibility = View.GONE
                 binding.textLogo.visibility = View.GONE
-                binding.textCoverPhoto.visibility = View.GONE
+//                binding.textCoverPhoto.visibility = View.GONE
 
                 binding.imageEditName.isEnabled = false
                 binding.imageEditDeliveryPrice.isEnabled = false
                 binding.imageEditOpeningTime.isEnabled = false
                 binding.imageEditClosingTime.isEnabled = false
                 binding.textLogo.isEnabled = false
-                binding.textCoverPhoto.isEnabled = false
+//                binding.textCoverPhoto.isEnabled = false
 
                 binding.switchOrders.isClickable = false
                 binding.switchDelivery.isClickable = false
@@ -345,10 +345,10 @@ class ShopProfileActivity : AppCompatActivity() {
             var openingTime =
                 SimpleDateFormat("HH:mm", Locale.US).parse( "00:00")
 
-            if(mShop.opening_time.isNotEmpty()){
-                openingTime =
-                    SimpleDateFormat("HH:mm", Locale.US).parse(mShop.opening_time )
-            }
+//            if(mShop.opening_time.isNotEmpty()){
+//                openingTime =
+//                    SimpleDateFormat("HH:mm", Locale.US).parse(mShop.opening_time )
+//            }
             val timePickerDialog = TimePickerDialog(
                 this,
                 TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
@@ -370,10 +370,10 @@ class ShopProfileActivity : AppCompatActivity() {
             var closingTime =
                 SimpleDateFormat("HH:mm", Locale.US).parse("00:00")
 
-            if(mShop.closing_time.isNotEmpty()){
-                closingTime =
-                    SimpleDateFormat("HH:mm", Locale.US).parse(mShop.closing_time )
-            }
+//            if(mShop.closing_time.isNotEmpty()){
+//                closingTime =
+//                    SimpleDateFormat("HH:mm", Locale.US).parse(mShop.closing_time )
+//            }
             val timePickerDialog = TimePickerDialog(
                 this,
                 TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
@@ -399,14 +399,14 @@ class ShopProfileActivity : AppCompatActivity() {
                 .cropSquare()
                 .start()
         }
-        binding.textCoverPhoto.setOnClickListener {
-            isShopCoverImageClicked = true;
-            ImagePicker.with(this)
-                .galleryOnly()
-                .compress(1024)
-                .crop(16f, 9f)
-                .start()
-        }
+//        binding.textCoverPhoto.setOnClickListener {
+//            isShopCoverImageClicked = true;
+//            ImagePicker.with(this)
+//                .galleryOnly()
+//                .compress(1024)
+//                .crop(16f, 9f)
+//                .start()
+//        }
 //        binding.imageLogo.setOnClickListener {
 //            val intent = Intent(applicationContext, DisplayActivity::class.java)
 //            val photoUrl =

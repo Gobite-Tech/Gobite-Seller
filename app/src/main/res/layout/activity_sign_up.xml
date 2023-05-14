@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/poppins_semibold"
-            android:hint="Name"
+            android:hint="Sop Name"
             android:inputType="textPersonName" />
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_number"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/poppins_semibold"
-            android:hint="Number"
+            android:hint="Phone Number"
             android:inputType="number" />
 
         <com.google.android.material.textfield.TextInputEditText
@@ -95,7 +95,7 @@
                 android:paddingTop="8dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="8dp"
-                android:text="Select your campus"
+                android:text="CAMPUS: IITK"
                 android:textSize="16sp" />
         </LinearLayout>
 

@@ -434,6 +434,58 @@
                 </LinearLayout>
 
 
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="top"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:fontFamily="@font/poppins_semibold"-->
+<!--                    android:gravity="center|start"-->
+<!--                    android:text="Cover photos"-->
+<!--                    android:textColor="@color/colorAccent"-->
+<!--                    android:textSize="12sp" />-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/layout_choose_cover_photo"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="#f2f2f2"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <HorizontalScrollView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_marginEnd="8dp">-->
+
+<!--                        <androidx.recyclerview.widget.RecyclerView-->
+<!--                            android:id="@+id/recycler_cover_photo"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--                            tools:itemCount="5"-->
+<!--                            tools:listitem="@layout/item_thumbnail" />-->
+<!--                    </HorizontalScrollView>-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/text_cover_photo"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="top"-->
+<!--                        android:drawableEnd="@drawable/ic_image_picker"-->
+<!--                        android:drawablePadding="8dp"-->
+<!--                        android:fontFamily="@font/poppins_semibold"-->
+<!--                        android:gravity="center|start"-->
+<!--                        android:paddingStart="8dp"-->
+<!--                        android:paddingTop="8dp"-->
+<!--                        android:paddingEnd="8dp"-->
+<!--                        android:paddingBottom="8dp"-->
+<!--                        android:text="Add image"-->
+<!--                        android:textSize="16sp" />-->
+<!--                </LinearLayout>-->
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -441,59 +493,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_semibold"
                     android:gravity="center|start"
-                    android:text="Cover photos"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="12sp" />
-
-                <LinearLayout
-                    android:id="@+id/layout_choose_cover_photo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#f2f2f2"
-                    android:orientation="vertical">
-
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recycler_cover_photo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:itemCount="5"
-                            tools:listitem="@layout/item_thumbnail" />
-                    </HorizontalScrollView>
-
-                    <TextView
-                        android:id="@+id/text_cover_photo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:drawableEnd="@drawable/ic_image_picker"
-                        android:drawablePadding="8dp"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:gravity="center|start"
-                        android:paddingStart="8dp"
-                        android:paddingTop="8dp"
-                        android:paddingEnd="8dp"
-                        android:paddingBottom="8dp"
-                        android:text="Add image"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:gravity="center|start"
-                    android:text="Logo"
+                    android:text="Logo (512 x 512)"
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp" />
 
