@@ -12,14 +12,42 @@ import com.example.gobiteseller.data.model.AddItemResponse
 import com.example.gobiteseller.data.model.AddVariant
 import com.example.gobiteseller.data.model.DeleteRequest
 import com.example.gobiteseller.data.model.DeleteResponse
+import com.example.gobiteseller.data.model.IconResponse
 import com.example.gobiteseller.data.model.MenuModel
 import com.example.gobiteseller.data.model.Variant
 import com.example.gobiteseller.data.retrofit.ItemRepository
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import java.net.UnknownHostException
 
 class MenuItemViewModel(
     private val itemRepository: ItemRepository, private val preferencesHelper: PreferencesHelper) : ViewModel() {
+
+    //setIcon
+    private val menuIconRequest = MutableLiveData<Resource<AddItemResponse>>()
+    val menuIconRequestResponse: LiveData<Resource<AddItemResponse>>
+        get() = menuIconRequest
+
+    fun uploadIcon(itemId: String,imagePart: MultipartBody.Part) {
+        viewModelScope.launch {
+            try {
+                menuIconRequest.value = Resource.loading()
+                val response = itemRepository.uploadMenuIcon(itemId,imagePart)
+                e("ic",response.toString())
+                if (response.isSuccessful) {
+                    menuIconRequest.value = Resource.success(response.body()!!)
+                } else {
+                    menuIconRequest.value = Resource.empty()
+                }
+            } catch (e: Exception) {
+                if (e is UnknownHostException) {
+                    menuIconRequest.value = Resource.offlineError()
+                } else {
+                    menuIconRequest.value = Resource.error(e)
+                }
+            }
+        }
+    }
 
 
     //get menu data

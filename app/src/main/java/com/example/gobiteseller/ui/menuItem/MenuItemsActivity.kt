@@ -32,6 +32,9 @@ import com.google.firebase.storage.StorageReference
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.getScopeName
@@ -52,6 +55,7 @@ class MenuItemsActivity : AppCompatActivity() {
     private lateinit var dialogBinding: BottomSheetAddEditMenuItemBinding
     private var mStorageRef: StorageReference? = null
     private var variantPrice:Double=0.0
+    private var mItemID=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -290,48 +294,59 @@ class MenuItemsActivity : AppCompatActivity() {
             binding.buttonSaveChanges.visibility = View.GONE
         })
 
-//        viewModel.performUploadImageStatus.observe(this, androidx.lifecycle.Observer { resource ->
-//            println("resource: $resource")
-//            if (resource != null) {
-//                when (resource.status) {
-//
-//                    Resource.Status.SUCCESS -> {
-//                        progressDialog.dismiss()
-//                        resource.data?.let {
-//                            changedItemImageUrl = resource.data
-//                            dialogBinding.imageItem.visibility = View.VISIBLE
-//                            dialogBinding.textChangeImage.text = "UPDATE IMAGE"
-//                            Picasso.get().load(resource.data)
-//                                .placeholder(R.drawable.ic_food)
-//                                .into(dialogBinding.imageItem)
-//                        }
-//                    }
-//
-//                    Resource.Status.ERROR -> {
-//                        progressDialog.dismiss()
-//                        Toast.makeText(
-//                            applicationContext,
-//                            "Try again!! Error Occurred " + resource.message,
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
-//
-//                    Resource.Status.OFFLINE_ERROR -> {
-//                        progressDialog.dismiss()
-//                        Toast.makeText(
-//                            applicationContext,
-//                            "No Internet Connection",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
-//
-//                    Resource.Status.LOADING -> {
-//                        progressDialog.setMessage("Updating...")
-//                        progressDialog.show()
-//                    }
-//                }
-//            }
-//        })
+        viewModel.menuIconRequestResponse.observe(this, androidx.lifecycle.Observer { resource ->
+            println("resource: $resource")
+            if (resource != null) {
+                progressDialog.dismiss()
+                when (resource.status) {
+
+                    Resource.Status.SUCCESS -> {
+                        progressDialog.dismiss()
+                        resource.data?.let {
+                            changedItemImageUrl = resource.data?.data?.item?.icon!!
+                            dialogBinding.imageItem.visibility = View.VISIBLE
+                            dialogBinding.textChangeImage.text = "UPDATE IMAGE"
+                            Picasso.get().load(resource.data?.data?.item?.icon!!)
+                                .placeholder(R.drawable.ic_food)
+                                .into(dialogBinding.imageItem)
+                        }
+                    }
+                    Resource.Status.EMPTY -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(
+                            applicationContext,
+                            "Try again!! Error Occurred " + resource.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    Resource.Status.ERROR -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(
+                            applicationContext,
+                            "Try again!! Error Occurred " + resource.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    Resource.Status.OFFLINE_ERROR -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(
+                            applicationContext,
+                            "No Internet Connection",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    Resource.Status.LOADING -> {
+                        progressDialog.dismiss()
+                        progressDialog.setMessage("Updating...")
+                        progressDialog.show()
+                    }
+
+                    else -> {}
+                }
+            }
+        })
 
         viewModel.addItemRequestResponse.observe(this, androidx.lifecycle.Observer { resource ->
             if (resource != null) {
@@ -558,8 +573,7 @@ class MenuItemsActivity : AppCompatActivity() {
             .into(dialogBinding.imageItem)
 
         if (item != null) {
-
-
+            mItemID=item.id
             dialogBinding.editItemName.setText(item.name)
             dialogBinding.editItemPrice.setText(item.variants[item.variants.size-1].price.toInt().toString())
             dialogBinding.switchAvailability.isChecked = item.status == "active"
@@ -602,6 +616,7 @@ class MenuItemsActivity : AppCompatActivity() {
                     R.color.switchSelected
                 )
             )
+            dialogBinding.layoutChooseItemPhoto.visibility = View.GONE
             dialogBinding.imageItem.visibility = View.GONE
             dialogBinding.textChangeImage.text = "ADD IMAGE"
         }
@@ -722,15 +737,22 @@ class MenuItemsActivity : AppCompatActivity() {
             if (requestCode == ImagePicker.REQUEST_CODE) {
                 val fileUri = data?.data
                 val file: File? = ImagePicker.getFile(data)
-                var storageReference: StorageReference? = null
-                storageReference =
-                    mStorageRef?.child("itemImage/" + preferencesHelper.id + "/" + file?.name + Calendar.getInstance().time)
-                if (storageReference != null) {
-                    if (fileUri != null) {
-//                        viewModel.uploadPhotoToFireBase(storageReference, fileUri)
 
-                    }
-                }
+                val imagePart = MultipartBody.Part.createFormData("icon_file", file?.name, RequestBody.create(
+                    MediaType.parse("image/png"), file!!))
+
+
+                viewModel.uploadIcon(mItemID,imagePart)
+
+//                var storageReference: StorageReference? = null
+//                storageReference =
+//                    mStorageRef?.child("itemImage/" + preferencesHelper.id + "/" + file?.name + Calendar.getInstance().time)
+//                if (storageReference != null) {
+//                    if (fileUri != null) {
+////                        viewModel.uploadPhotoToFireBase(storageReference, fileUri)
+//
+//                    }
+//                }
             }
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()

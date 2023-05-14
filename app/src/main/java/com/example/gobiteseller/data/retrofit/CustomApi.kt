@@ -6,6 +6,7 @@ import com.example.gobiteseller.data.model.AddVariant
 import com.example.gobiteseller.data.model.ConfigurationModel
 import com.example.gobiteseller.data.model.DeleteRequest
 import com.example.gobiteseller.data.model.DeleteResponse
+import com.example.gobiteseller.data.model.IconResponse
 import com.example.gobiteseller.data.model.ItemModel
 import com.example.gobiteseller.data.model.LoginRequest
 import com.example.gobiteseller.data.model.LoginResponse
@@ -26,12 +27,23 @@ import com.example.gobiteseller.data.model.UserShopListModel
 import com.example.gobiteseller.data.model.Variant
 import com.example.gobiteseller.data.model.otpRequest
 import com.example.gobiteseller.data.model.otpResponse
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
 
 interface CustomApi  {
 
     //new stuff
+
+    @Multipart
+    @POST("v1/shop/icon")
+    suspend fun uploadIcon(
+        @Part imagePart: MultipartBody.Part
+    ): Response<IconResponse>
+
+    @Multipart
+    @POST("v1/shop/item/{itemId}/icon")
+    suspend fun uploadMenuIcon(@Path("itemId") itemId: String, @Part imagePart: MultipartBody.Part): Response<AddItemResponse>
 
     @GET("v1/shop")
     suspend fun getShop():Response<Shops>

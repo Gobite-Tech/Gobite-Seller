@@ -30,6 +30,9 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
@@ -417,52 +420,61 @@ class ShopProfileActivity : AppCompatActivity() {
 
     @SuppressLint("SuspiciousIndentation")
     private fun setObserver() {
-//        viewModel.performUploadImageStatus.observe(this, androidx.lifecycle.Observer { resource ->
-//            if (resource != null) {
-//                when (resource.status) {
-//
-//                    Resource.Status.SUCCESS -> {
-//                        progressDialog.dismiss()
-//                        resource.data?.let {
+        viewModel.iconRequestResponse.observe(this, androidx.lifecycle.Observer { resource ->
+            if (resource != null) {
+                progressDialog.dismiss()
+                when (resource.status) {
+                    Resource.Status.SUCCESS -> {
+                        progressDialog.dismiss()
+                        resource.data?.let {
 //                            if (isShopCoverImageClicked) {
 //                                imageList.add(resource.data)
 //                                shopCoverImageAdapter?.notifyDataSetChanged()
 //                                isShopCoverImageClicked = !isShopCoverImageClicked
 //                            } else if (isShopLogoClicked) {
 //                                photoUrl = resource.data
-//                                Picasso.get().load(resource.data)
-//                                    .placeholder(R.drawable.ic_shop)
-//                                    .into(binding.imageLogo)
-//                                isShopLogoClicked = !isShopLogoClicked
+                                Picasso.get().load(resource.data.data.icon)
+                                    .placeholder(R.drawable.ic_shop)
+                                    .into(binding.imageLogo)
+                                isShopLogoClicked = !isShopLogoClicked
 //                            }
-//                        }
-//                    }
-//
-//                    Resource.Status.ERROR -> {
-//                        progressDialog.dismiss()
-//                        Toast.makeText(
-//                            applicationContext,
-//                            "Try again!! Error Occurred \n" + resource.message,
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
-//
-//                    Resource.Status.OFFLINE_ERROR -> {
-//                        progressDialog.dismiss()
-//                        Toast.makeText(
-//                            applicationContext,
-//                            "No Internet Connection",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
-//
-//                    Resource.Status.LOADING -> {
-//                        progressDialog.setMessage("Updating...")
-//                        progressDialog.show()
-//                    }
-//                }
-//            }
-//        })
+                        }
+                    }
+                    Resource.Status.EMPTY -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(
+                            applicationContext,
+                            "Try again!! Error Occurred " + resource.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    Resource.Status.ERROR -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(
+                            applicationContext,
+                            "Try again!! Error Occurred \n" + resource.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    Resource.Status.OFFLINE_ERROR -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(
+                            applicationContext,
+                            "No Internet Connection",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    Resource.Status.LOADING -> {
+                        progressDialog.setMessage("Updating...")
+                        progressDialog.show()
+                    }
+
+                    else -> {}
+                }
+            }
+        })
 
         viewModel.performUpdateShopStatus.observe(
             this,
@@ -574,20 +586,26 @@ class ShopProfileActivity : AppCompatActivity() {
             if (requestCode == ImagePicker.REQUEST_CODE) {
                 val fileUri = data?.data
                 val file: File? = ImagePicker.getFile(data)
-                var storageReference: StorageReference? = null
-                if (isShopLogoClicked) {
-                    storageReference =
-                        mStorageRef?.child("profileImage/" + mShop.id + "/" + file?.name + Calendar.getInstance().time)
 
-                } else if (isShopCoverImageClicked) {
-                    storageReference =
-                        mStorageRef?.child("coverImage/" + mShop.id + "/" + file?.name + Calendar.getInstance().time)
-                }
-                if (storageReference != null) {
-                    if (fileUri != null) {
-//                        viewModel.uploadPhotoToFireBase(storageReference, fileUri)
-                    }
-                }
+                val imagePart = MultipartBody.Part.createFormData("icon_file", file?.name, RequestBody.create(
+                    MediaType.parse("image/png"), file!!))
+
+
+                viewModel.uploadIcon(imagePart)
+//                var storageReference: StorageReference? = null
+//                if (isShopLogoClicked) {
+//                    storageReference =
+//                        mStorageRef?.child("profileImage/" + mShop.id + "/" + file?.name + Calendar.getInstance().time)
+//
+//                } else if (isShopCoverImageClicked) {
+//                    storageReference =
+//                        mStorageRef?.child("coverImage/" + mShop.id + "/" + file?.name + Calendar.getInstance().time)
+//                }
+//                if (storageReference != null) {
+//                    if (fileUri != null) {
+////                        viewModel.uploadPhotoToFireBase(storageReference, fileUri)
+//                    }
+//                }
             }
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()

@@ -6,7 +6,7 @@ data class Item(
     val created_at: String,
     val description: String,
     val filterable_fields: List<Any>,
-    val icon: Any,
+    val icon: String?,
     val id: String,
     val item_type: String,
     val meta_data: MetaDataX,

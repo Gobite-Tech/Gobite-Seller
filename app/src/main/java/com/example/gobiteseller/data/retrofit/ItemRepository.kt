@@ -5,6 +5,7 @@ import com.example.gobiteseller.data.model.AddVariant
 import com.example.gobiteseller.data.model.DeleteRequest
 import com.example.gobiteseller.data.model.ItemModel
 import com.example.gobiteseller.data.model.Variant
+import okhttp3.MultipartBody
 import retrofit2.Retrofit
 
 class ItemRepository(private val retrofit: Retrofit) {
@@ -12,6 +13,7 @@ class ItemRepository(private val retrofit: Retrofit) {
     val service = retrofit.create(CustomApi::class.java)
 
     //new
+    suspend fun uploadMenuIcon(itemId: String,imagePart: MultipartBody.Part)=service.uploadMenuIcon(itemId,imagePart)
     suspend fun addVariantNew(itemId:String,addVariantRequest: AddVariant)=service.addVariant(itemId,addVariantRequest)
 
     suspend fun updateItemNew(itemId:String,addItemRequest: AddItemRequest)=service.updateItemNew(itemId,addItemRequest)

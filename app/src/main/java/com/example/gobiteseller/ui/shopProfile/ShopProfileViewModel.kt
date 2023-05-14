@@ -1,16 +1,19 @@
 package com.example.gobiteseller.ui.shopProfile
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gobiteseller.data.local.Resource
+import com.example.gobiteseller.data.model.IconResponse
 import com.example.gobiteseller.data.model.MenuModel
 import com.example.gobiteseller.data.model.Shop
 import com.example.gobiteseller.data.model.ShopUpdateRequestTemp
 import com.example.gobiteseller.data.model.Shops
 import com.example.gobiteseller.data.retrofit.ShopRepository
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import java.net.UnknownHostException
 
 class ShopProfileViewModel (private val shopRepository: ShopRepository) : ViewModel(){
@@ -54,6 +57,33 @@ class ShopProfileViewModel (private val shopRepository: ShopRepository) : ViewMo
                     performUpdateShop.value = Resource.offlineError()
                 } else {
                     performUpdateShop.value = Resource.error(e)
+                }
+            }
+        }
+    }
+
+
+    //setIcon
+    private val iconRequest = MutableLiveData<Resource<IconResponse>>()
+    val iconRequestResponse: LiveData<Resource<IconResponse>>
+        get() = iconRequest
+
+    fun uploadIcon(imagePart: MultipartBody.Part) {
+        viewModelScope.launch {
+            try {
+                iconRequest.value = Resource.loading()
+                val response = shopRepository.uploadIcon(imagePart)
+                Log.e("ic", response.toString())
+                if (response.isSuccessful) {
+                    iconRequest.value = Resource.success(response.body()!!)
+                } else {
+                    iconRequest.value = Resource.empty()
+                }
+            } catch (e: Exception) {
+                if (e is UnknownHostException) {
+                    iconRequest.value = Resource.offlineError()
+                } else {
+                    iconRequest.value = Resource.error(e)
                 }
             }
         }
