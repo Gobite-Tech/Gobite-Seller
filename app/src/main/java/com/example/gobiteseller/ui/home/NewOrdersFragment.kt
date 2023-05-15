@@ -83,7 +83,7 @@ class NewOrdersFragment : Fragment() {
                         if (resource.data != null){
                             resource.data.let { it1 ->
                                 it1.data.orders.forEach {
-                                    if (it.order_status == "created"){
+                                    if (it.order_status == "placed"){
                                         ordersList.add(it)
                                     }
                                 }

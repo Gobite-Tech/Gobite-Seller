@@ -14,7 +14,8 @@ object CommonUtils {
             val _12HourSDF = SimpleDateFormat("hh:mm a",Locale.US)
             val _24HourDt: Date = _24HourSDF.parse(_24HourTime)
 
-            return _12HourSDF.format(_24HourDt)
+//            return _12HourSDF.format(_24HourDt)
+            return  _24HourSDF.format(_24HourDt)
 
         } catch (e: Exception) {
             e.printStackTrace()

@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log.e
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -353,8 +354,9 @@ class ShopProfileActivity : AppCompatActivity() {
                 this,
                 TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
                     val time = CommonUtils.TimeConversion24to12(hourOfDay, minute)
+                    e("samay",time.toString())
                     binding.textOpeningTime.text = time
-                }, openingTime.hours, openingTime.minutes, false
+                }, openingTime.hours, openingTime.minutes, true
             )
             timePickerDialog.show()
             timePickerDialog.getButton(TimePickerDialog.BUTTON_NEGATIVE).setTextColor(
@@ -379,7 +381,7 @@ class ShopProfileActivity : AppCompatActivity() {
                 TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
                     val time = CommonUtils.TimeConversion24to12(hourOfDay, minute)
                     binding.textClosingTime.text = time
-                }, closingTime.hours, closingTime.minutes, false
+                }, closingTime.hours, closingTime.minutes, true
             )
             timePickerDialog.show()
             timePickerDialog.getButton(TimePickerDialog.BUTTON_NEGATIVE).setTextColor(
