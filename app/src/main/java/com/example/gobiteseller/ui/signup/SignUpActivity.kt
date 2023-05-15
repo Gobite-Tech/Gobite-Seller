@@ -8,6 +8,7 @@ import android.util.Log
 import android.util.Log.e
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.gobiteseller.R
@@ -39,6 +40,9 @@ class SignUpActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.button_register).setOnClickListener {
             signUpRequest()
+        }
+        findViewById<ImageView>(R.id.image_close_signup).setOnClickListener {
+            onBackPressed()
         }
 
 

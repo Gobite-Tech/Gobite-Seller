@@ -13,7 +13,7 @@
         android:padding="16dp">
 
         <ImageView
-            android:id="@+id/image_close"
+            android:id="@+id/image_close_signup"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginBottom="32dp"
