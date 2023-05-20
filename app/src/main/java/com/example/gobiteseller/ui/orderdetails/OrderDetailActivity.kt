@@ -45,7 +45,7 @@ class OrderDetailActivity : AppCompatActivity() {
         binding.imageClose.setOnClickListener {
             onBackPressed()
         }
-        binding.textUserName.text=order.customer_id.toString()
+        binding.textUserName.text=order.customer_name
         binding.textLastUpdateTime.text=order.order_placed_time
         binding.textOrderId.text=order.id
         binding.textOrderStatus.text=order.order_status

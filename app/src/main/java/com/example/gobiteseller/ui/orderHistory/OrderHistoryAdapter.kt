@@ -37,7 +37,7 @@ class OrderHistoryAdapter(private val orderList: List<OrderX>, private val liste
     class OrderViewHolder(var binding: ItemPastOrderBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SimpleDateFormat", "SetTextI18n")
         fun bind(order: OrderX, position: Int, listener: OnItemClickListener) {
-            binding.textCustomerName.text = order.customer_id.toString()
+            binding.textCustomerName.text = order.customer_name.toString()
             try {
                 val appDateFormat = SimpleDateFormat("yyyy MMMM dd, hh:mm:ss")
                 val dateString = appDateFormat.format(order.created_at)

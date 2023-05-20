@@ -42,7 +42,7 @@ class OrdersAdapter(
         fun bind(order: OrderX, position: Int, listener: OnItemClickListener) {
             //Picasso.get().load(menuItem.photoUrl).into(binding.imageShop)
             binding.textOrderId.text = order.id
-            binding.textCustomerName.text = order.customer_id.toString()
+            binding.textCustomerName.text = order.customer_name
             try {
                 val appDateFormat = SimpleDateFormat("dd MMMM yyyy, hh:mm aaa")
                 val date = order.updated_at
