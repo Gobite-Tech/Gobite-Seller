@@ -71,13 +71,14 @@
                             android:paddingTop="3dp"
                             android:textAppearance="@style/AppbarTitle"
                             android:textColor="@android:color/white"
-                            tools:text="Shrikanth Ravi" />
+                            tools:text="Name" />
 
                         <ImageView
                             android:id="@+id/image_call"
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:layout_gravity="center"
+                            android:visibility="gone"
                             android:src="@drawable/ic_call_white" />
 
                     </LinearLayout>
@@ -87,7 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -160,7 +161,7 @@
                         android:gravity="center|start"
                         android:padding="16dp"
                         android:textStyle="bold"
-                        tools:text="24 March 2020, 07:59 pm" />
+                        tools:text="2023-05-15 21:50:21" />
 
                     <View
                         android:layout_width="match_parent"
@@ -180,6 +181,7 @@
                         android:gravity="center|start"
                         android:padding="16dp"
                         android:textStyle="bold"
+                        android:visibility="gone"
                         tools:text="Boys Hostel" />
 
                     <View
@@ -198,7 +200,7 @@
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_weight="2"
                             android:orientation="vertical">
 
                             <TextView
@@ -228,43 +230,43 @@
                                 tools:text="ask123ns" />
                         </LinearLayout>
 
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="#f2f2f2" />
+<!--                        <View-->
+<!--                            android:layout_width="1dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:background="#f2f2f2" />-->
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:orientation="vertical">-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="start"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginTop="16dp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="TRANSACTION ID"
-                                android:textColor="@color/captionColor"
-                                android:textSize="12sp" />
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="start"-->
+<!--                                android:layout_marginStart="16dp"-->
+<!--                                android:layout_marginTop="16dp"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:text="TRANSACTION ID"-->
+<!--                                android:textColor="@color/captionColor"-->
+<!--                                android:textSize="12sp" />-->
 
-                            <TextView
-                                android:id="@+id/text_transaction_id"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="start"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginEnd="16dp"
-                                android:layout_marginBottom="16dp"
-                                android:fontFamily="@font/poppins_semibold"
-                                android:singleLine="true"
-                                android:textColor="@android:color/black"
-                                android:textSize="14sp"
-                                android:textStyle="bold"
-                                tools:text="ask123ns" />
-                        </LinearLayout>
+<!--                            <TextView-->
+<!--                                android:id="@+id/text_transaction_id"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="start"-->
+<!--                                android:layout_marginStart="16dp"-->
+<!--                                android:layout_marginEnd="16dp"-->
+<!--                                android:layout_marginBottom="16dp"-->
+<!--                                android:fontFamily="@font/poppins_semibold"-->
+<!--                                android:singleLine="true"-->
+<!--                                android:textColor="@android:color/black"-->
+<!--                                android:textSize="14sp"-->
+<!--                                android:textStyle="bold"-->
+<!--                                tools:text="ask123ns" />-->
+<!--                        </LinearLayout>-->
 
                     </LinearLayout>
 
@@ -274,15 +276,41 @@
                         android:background="#F2F2F2" />
 
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycler_status"
-                        android:layout_width="match_parent"
+<!--                    <androidx.recyclerview.widget.RecyclerView-->
+<!--                        android:id="@+id/recycler_status"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_marginBottom="8dp"-->
+<!--                        android:overScrollMode="never"-->
+<!--                        tools:itemCount="1"-->
+<!--                        tools:listitem="@layout/item_order_status" />-->
+                    <TextView
+                        android:text="STATUS"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:overScrollMode="never"
-                        tools:itemCount="1"
-                        tools:listitem="@layout/item_order_status" />
+                        android:layout_gravity="start"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:textColor="@color/captionColor"
+                        android:textSize="12sp"
+                        />
+                    <TextView
+                        android:id="@+id/text_order_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:singleLine="true"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="prepared" />
+
 
 
                     <View
@@ -374,11 +402,11 @@
 
 
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="8dp"
-                        android:background="#f2f2f2" />
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:background="#f2f2f2" />-->
 
                     <TextView
                         android:id="@+id/text_rating_feedback"

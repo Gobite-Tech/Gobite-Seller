@@ -72,9 +72,9 @@ class OrderHistoryActivity : AppCompatActivity() {
     private fun setupShopRecyclerView() {
         orderAdapter = OrderHistoryAdapter(orderList, object : OrderHistoryAdapter.OnItemClickListener {
             override fun onItemClick(item: OrderX?, position: Int) {
-//                val intent = Intent(applicationContext, OrderDetailActivity::class.java)
-//                intent.putExtra(AppConstants.ORDER_DETAIL, Gson().toJson(item))
-//                startActivity(intent)
+                val intent = Intent(applicationContext, OrderDetailActivity::class.java)
+                intent.putExtra(AppConstants.ORDER_DETAIL, Gson().toJson(item))
+                startActivity(intent)
             }
         })
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
