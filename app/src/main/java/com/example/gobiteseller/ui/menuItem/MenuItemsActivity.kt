@@ -21,7 +21,6 @@ import com.example.gobiteseller.data.model.AddVariant
 import com.example.gobiteseller.data.model.CategoryItemListModel
 import com.example.gobiteseller.data.model.DataXXXX
 import com.example.gobiteseller.data.model.DeleteRequest
-import com.example.gobiteseller.data.model.Variant
 import com.example.gobiteseller.databinding.ActivityMenuItemsBinding
 import com.example.gobiteseller.databinding.BottomSheetAddEditMenuItemBinding
 import com.example.gobiteseller.utils.AppConstants
@@ -30,16 +29,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.storage.StorageReference
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.component.getScopeName
 import java.io.File
-import java.util.Calendar
 
 class MenuItemsActivity : AppCompatActivity() {
 
@@ -397,16 +393,29 @@ class MenuItemsActivity : AppCompatActivity() {
                 when (resource.status) {
 
                     Resource.Status.SUCCESS -> {
+
+                        e("ae","ae")
                         progressDialog.dismiss()
                         resource.data?.let {
-                            if (preferencesHelper.updateItemRequest != "null") {
-                                val listType = object : TypeToken<List<DataXXXX?>?>() {}.type
-                                updateList(
-                                    ArrayList(Gson().fromJson<List<DataXXXX>>(preferencesHelper.updateItemRequest, listType))
-                                )
-                            } else {
-                                preferencesHelper.currentShop.let { viewModel.getMenu() }
+                            for(i in menuItemList.indices){
+                                if(menuItemList[i].id==it.data.item.id){
+                                    val item=DataXXXX(it.data.item.category,
+                                        it.data.item.cover_photos ,it.data.item.created_at,it.data.item.description,it.data.item.filterable_fields,it.data.item.icon
+                                        ,it.data.item.id,it.data.item.item_type,it.data.item.meta_data,it.data.item.name,it.data.item.status
+                                        ,it.data.item.updated_at,it.data.item.variants
+                                    )
+                                    menuItemList[i]=item
+                                    menuAdapter.notifyDataSetChanged()
+                                }
                             }
+                            //if (preferencesHelper.updateItemRequest != "null") {
+//                                val listType = object : TypeToken<List<DataXXXX?>?>() {}.type
+//                                updateList(
+//                                    ArrayList(Gson().fromJson<List<DataXXXX>>(it.data.item.toString(), listType))
+//                                )
+                            //} else {
+                                //preferencesHelper.currentShop.let { viewModel.getMenu() }
+                            //}
                         }
                     }
 
@@ -449,14 +458,27 @@ class MenuItemsActivity : AppCompatActivity() {
                     Resource.Status.SUCCESS -> {
                         progressDialog.dismiss()
                         resource.data?.let {
-                            if (preferencesHelper.updateItemRequest != "null") {
-//                                val listType = object : TypeToken<List<DataXXXX?>?>() {}.type
-//                                updateList(
-//                                    ArrayList(Gson().fromJson<List<DataXXXX>>(preferencesHelper.updateItemRequest, listType))
-//                                )
-                            } else {
-                                preferencesHelper.currentShop.let { viewModel.getMenu() }
+
+                            for(i in menuItemList.indices){
+                                if(menuItemList[i].id==it.data.item.id){
+                                    val item=DataXXXX(it.data.item.category,
+                                        it.data.item.cover_photos ,it.data.item.created_at,it.data.item.description,it.data.item.filterable_fields,it.data.item.icon
+                                        ,it.data.item.id,it.data.item.item_type,it.data.item.meta_data,it.data.item.name,it.data.item.status
+                                        ,it.data.item.updated_at,it.data.item.variants
+                                    )
+                                    menuItemList[i]=item
+                                    menuAdapter.notifyDataSetChanged()
+                                }
                             }
+
+//                            if (preferencesHelper.updateItemRequest != "null") {
+////                                val listType = object : TypeToken<List<DataXXXX?>?>() {}.type
+////                                updateList(
+////                                    ArrayList(Gson().fromJson<List<DataXXXX>>(preferencesHelper.updateItemRequest, listType))
+////                                )
+//                            } else {
+//                                preferencesHelper.currentShop.let { viewModel.getMenu() }
+//                            }
                         }
                     }
 
@@ -546,7 +568,7 @@ class MenuItemsActivity : AppCompatActivity() {
         var i = 0
         var k = 0
         while (i < menuItemList.size) {
-            if (k < itemModelList.size && menuItemList.get(i).id == itemModelList.get(k).id)
+            if (k < itemModelList.size && menuItemList[i].id == itemModelList[k].id)
                 menuItemList[i] = itemModelList.get(k++)
             i++
         }

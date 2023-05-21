@@ -229,7 +229,7 @@ class ReadyFragment : Fragment() {
 //        binding.animationView.loop(true)
 //        binding.animationView.setAnimation("empty_animation.json")
 //        binding.animationView.playAnimation()
-        errorSnackBar.setText("No Orders is ready for pickup or delivery")
+        errorSnackBar.setText("No Orders is ready for pickup ")
         Handler().postDelayed({ errorSnackBar.show() }, 500)
     }
 

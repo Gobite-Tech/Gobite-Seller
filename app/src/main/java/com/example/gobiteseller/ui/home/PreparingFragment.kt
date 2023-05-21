@@ -264,7 +264,7 @@ class PreparingFragment : Fragment() {
 //        binding.animationView.loop(true)
 //        binding.animationView.setAnimation("empty_animation.json")
 //        binding.animationView.playAnimation()
-//        errorSnackBar.setText("No New Orders available")
+        errorSnackBar.setText("No New Orders available")
         Handler().postDelayed({ errorSnackBar.show() }, 500)
     }
 

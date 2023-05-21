@@ -2,7 +2,7 @@ package com.example.gobiteseller.data.model
 
 data class Item(
     val category: String,
-    val cover_photos: List<Any>,
+    val cover_photos: List<String>,
     val created_at: String,
     val description: String,
     val filterable_fields: List<Any>,
