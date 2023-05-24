@@ -96,6 +96,7 @@
                         android:textStyle="bold"
                         app:switchPadding="8dp"
                         app:thumbTint="#4CAF50"
+                        android:visibility="gone"
                         app:trackTint="#CCCCCC" />
 
 

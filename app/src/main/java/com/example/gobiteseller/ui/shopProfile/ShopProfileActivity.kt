@@ -63,7 +63,6 @@ class ShopProfileActivity : AppCompatActivity() {
         setListener()
         setObserver()
         viewModel.getShop()
-
     }
 
     private fun initView() {
@@ -103,16 +102,21 @@ class ShopProfileActivity : AppCompatActivity() {
 //            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 //        binding.recyclerCoverPhoto.adapter = shopCoverImageAdapter
         binding.editName.setText(mShop.name)
+//        if(mShop.name?.isNullOrBlank() == true){
+//            binding.editName.setText(preferencesHelper.name.toString())
+//            e("preferencesHelper",mShop.name!!)
+//        }
         val sdf = SimpleDateFormat("HH:mm:ss", Locale.US)
         val sdf2 = SimpleDateFormat("hh:mm a", Locale.US)
         binding.textOpeningTime.text = mShop.opening_time
         binding.textClosingTime.text = mShop.closing_time
+        binding.editMobileNumber.setText(mShop.mobile)
         Picasso.get().load(mShop.icon).placeholder(R.drawable.ic_shop)
             .into(binding.imageLogo)
         binding.switchOrders.isChecked = mShop.status == "ACTIVE"
-        binding.editAccountHolder.setText((mShop.payment.account_holder))
-        binding.editAccountIfsc.setText((mShop.payment.account_ifsc))
-        binding.editAccountNumber.setText((mShop.payment.account_number))
+        binding.editAccountHolder.setText((mShop.payment?.account_holder))
+        binding.editAccountIfsc.setText((mShop.payment?.account_ifsc))
+        binding.editAccountNumber.setText((mShop.payment?.account_number))
 //        binding.switchDelivery.isChecked = shopConfig?.configurationModel?.isDeliveryAvailable == 1
 
         if (binding.switchOrders.isChecked)
@@ -221,10 +225,13 @@ class ShopProfileActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please confirm AccountNumber", Toast.LENGTH_LONG).show()
             }
             else if (binding.editAccountHolder.isEnabled) {
-                Toast.makeText(this, "Please confirm editAccountHolder", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Please confirm AccountHolder", Toast.LENGTH_LONG).show()
             }
             else if (binding.editAccountIfsc.isEnabled) {
-                Toast.makeText(this, "Please confirm editAccountIfsc", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Please confirm AccountIfsc", Toast.LENGTH_LONG).show()
+            }
+            else if (binding.editMobileNumber.isEnabled) {
+                Toast.makeText(this, "Please confirm Mobile Number", Toast.LENGTH_LONG).show()
             }
             else {
                 val sdf = SimpleDateFormat("HH:mm", Locale.US)
@@ -234,10 +241,11 @@ class ShopProfileActivity : AppCompatActivity() {
                 val closingTime = sdf2.parse(binding.textClosingTime.text.toString())
                     ?.let { it1 -> sdf.format(it1) }
                 var mid = " "
+                preferencesHelper.mobile=binding.editMobileNumber.text.toString()
 
-                mShop.payment.account_number=binding.editAccountNumber.text.toString()!!
-                mShop.payment.account_ifsc=binding.editAccountIfsc.text.toString()!!
-                mShop.payment.account_holder=binding.editAccountHolder.text.toString()!!
+                mShop.payment?.account_number=binding.editAccountNumber.text.toString()!!
+                mShop.payment?.account_ifsc=binding.editAccountIfsc.text.toString()!!
+                mShop.payment?.account_holder=binding.editAccountHolder.text.toString()!!
 //                if(binding.layoutMerchantId.visibility == View.VISIBLE){
 //                    mid = binding.editMerchantId.text.toString()
 //                }else{
@@ -264,9 +272,9 @@ class ShopProfileActivity : AppCompatActivity() {
 
 
                 val shopModel=ShopUpdateRequestTemp(
-                    mShop.payment.account_holder,
-                    mShop.payment.account_ifsc,
-                    mShop.payment.account_number,
+                    mShop.payment?.account_holder,
+                    mShop.payment?.account_ifsc,
+                    mShop.payment?.account_number,
                     "IITK",
                     binding.editDeliveryPrice.text.toString().toInt(),
                     "GROCERY",
@@ -277,9 +285,9 @@ class ShopProfileActivity : AppCompatActivity() {
                     "ddlogesh@gmail.com",
                     "24AAACC1206D1ZM",
                     mShop.icon,
-                    mShop.address.lat,
-                    mShop.address.lng,
-                    "9176786586",
+                    mShop.address?.lat,
+                    mShop.address?.lng,
+                    preferencesHelper.mobile,
                     binding.editName.text.toString(),
                     openingTime!!,
                     "AZXPL1001E",
@@ -335,6 +343,15 @@ class ShopProfileActivity : AppCompatActivity() {
                 binding.imageEditDeliveryPrice.setImageResource(R.drawable.ic_edit)
             binding.editDeliveryPrice.isEnabled = !(binding.editDeliveryPrice.isEnabled)
         }
+
+        binding.imageEditMobileNumber.setOnClickListener {
+            if (!binding.editMobileNumber.isEnabled)
+                binding.imageEditMobileNumber.setImageResource(R.drawable.ic_check)
+            else
+                binding.imageEditMobileNumber.setImageResource(R.drawable.ic_edit)
+            binding.editMobileNumber.isEnabled = !(binding.editMobileNumber.isEnabled)
+        }
+
 //        binding.imageEditMerchantId.setOnClickListener {
 //            if (!binding.editMerchantId.isEnabled)
 //                binding.imageEditMerchantId.setImageResource(R.drawable.ic_check)

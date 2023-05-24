@@ -11,6 +11,8 @@ import android.util.Log.e
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gobiteseller.R
@@ -110,6 +112,12 @@ class MenuItemsActivity : AppCompatActivity() {
                                 .setPositiveButton("Yes") { dialog, _ ->
                                     itemModel?.id?.let {
                                         viewModel.deleteItem(DeleteRequest(it,"asehi"))
+                                    }
+                                    for(i in menuItemList.indices){
+                                            if(menuItemList[i].id==itemModel?.id){
+                                                menuItemList.removeAt(i)
+                                                break;
+                                            }
                                     }
                                     menuAdapter.notifyDataSetChanged()
                                 }
@@ -225,20 +233,20 @@ class MenuItemsActivity : AppCompatActivity() {
                                 binding.switchDelivery.visibility = View.GONE
                                 binding.textAddItem.visibility = View.GONE
                                 binding.textAddFirstItem.visibility = View.VISIBLE
-                                binding.animationView.visibility = View.VISIBLE
-                                binding.animationView.loop(true)
-                                binding.animationView.setAnimation("empty_animation.json")
-                                binding.animationView.playAnimation()
+//                                binding.animationView.visibility = View.VISIBLE
+//                                binding.animationView.loop(true)
+//                                binding.animationView.setAnimation("empty_animation.json")
+//                                binding.animationView.playAnimation()
                             } else {
-                                binding.switchDelivery.visibility = View.VISIBLE
+//                                binding.switchDelivery.visibility = View.VISIBLE
                                 binding.textAddFirstItem.visibility = View.GONE
                                 binding.animationView.visibility = View.GONE
-                                binding.animationView.cancelAnimation()
-                                preferencesHelper.role?.let {role->
-                                    if (role == AppConstants.ROLE.SHOP_OWNER.name) {
+//                                binding.animationView.cancelAnimation()
+
+
                                         binding.textAddItem.visibility = View.VISIBLE
-                                    }
-                                }
+
+
                                 if (menuItemList.none { item -> item.status == "inactive" }) {
                                     binding.switchDelivery.isChecked = true
                                     binding.switchDelivery.thumbTintList = ColorStateList.valueOf(
@@ -406,6 +414,11 @@ class MenuItemsActivity : AppCompatActivity() {
                                     )
                                     menuItemList[i]=item
                                     menuAdapter.notifyDataSetChanged()
+
+//                                    if(binding.textAddFirstItem.isVisible){
+//                                        Toast.makeText(this, "first item added", Toast.LENGTH_SHORT).show()
+//                                       finish()
+//                                    }
                                 }
                             }
                             //if (preferencesHelper.updateItemRequest != "null") {
@@ -518,6 +531,7 @@ class MenuItemsActivity : AppCompatActivity() {
 
                     Resource.Status.SUCCESS -> {
                         progressDialog.dismiss()
+
                         if (preferencesHelper.deleteItemRequest != -1) {
 //                            val tempList =
 //                                menuItemList.filter { it.id != preferencesHelper.deleteItemRequest }
@@ -638,6 +652,7 @@ class MenuItemsActivity : AppCompatActivity() {
                     R.color.switchSelected
                 )
             )
+            dialogBinding.textChooseItemPhoto.visibility=View.GONE
             dialogBinding.layoutChooseItemPhoto.visibility = View.GONE
             dialogBinding.imageItem.visibility = View.GONE
             dialogBinding.textChangeImage.text = "ADD IMAGE"

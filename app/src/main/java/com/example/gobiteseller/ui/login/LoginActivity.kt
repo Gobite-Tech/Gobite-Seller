@@ -199,7 +199,8 @@ class LoginActivity : AppCompatActivity() {
                             )
 
                             preferencesHelper.oauthId = loginresult.data.token
-                            e("lgn token:", preferencesHelper.oauthId!!)
+                            preferencesHelper.mobile= binding.editPhone.text.toString()
+                            e("lgn token:", preferencesHelper.mobile!!)
 
                             Toast.makeText(applicationContext,"Welcome!!",Toast.LENGTH_SHORT).show()
                             startActivity(Intent(applicationContext, HomeActivity::class.java))

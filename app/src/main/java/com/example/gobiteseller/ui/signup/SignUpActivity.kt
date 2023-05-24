@@ -75,6 +75,8 @@ class SignUpActivity : AppCompatActivity() {
                             val authToken = OtpResult.data.token
                             e("token:",authToken)
                             preferencesHelper.oauthId = authToken
+                            preferencesHelper.mobile= findViewById<EditText>(R.id.edit_number).text.toString()
+                            preferencesHelper.name=findViewById<EditText>(R.id.edit_name).text.toString()
 
 
                             Toast.makeText(applicationContext,"Welcome!!",Toast.LENGTH_SHORT).show()

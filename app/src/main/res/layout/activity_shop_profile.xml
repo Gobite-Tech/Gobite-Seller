@@ -123,6 +123,43 @@
                         android:paddingRight="8dp"
                         android:src="@drawable/ic_edit" />
                 </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center|start"
+                    android:text="Mobile Number"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="12sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_mobileNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:hint="eg:9876876543"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        tools:text="9876876543" />
+
+                    <ImageView
+                        android:id="@+id/image_edit_mobileNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="8dp"
+                        android:src="@drawable/ic_edit" />
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="match_parent"

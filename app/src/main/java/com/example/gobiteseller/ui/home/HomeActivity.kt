@@ -128,7 +128,7 @@ class HomeActivity : AppCompatActivity() {
 
         setStatusBarHeight()
 
-        if(mShopDetails.icon.isNotEmpty()){
+        if(mShopDetails.icon?.isNotEmpty() == true){
             Picasso.get().load(mShopDetails.icon).placeholder(R.drawable.ic_shop)
                 .into(binding.imageCompany)
         }
