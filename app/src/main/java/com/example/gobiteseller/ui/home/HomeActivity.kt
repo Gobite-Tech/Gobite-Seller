@@ -74,9 +74,9 @@ class HomeActivity : AppCompatActivity() {
             drawer.openDrawer()
         }
 
-        setupMaterialDrawer()
+         setupMaterialDrawer()
          setObservers()
-        setListeners()
+         setListeners()
          getShopDetails()
 
     }
@@ -438,8 +438,11 @@ class HomeActivity : AppCompatActivity() {
         e("resume","hua")
 
 //        initView()
+        getShopDetails()
         binding.textShopName.text=preferencesHelper.name
         updateHeaderLayoutUI()
+
+
     }
 
 

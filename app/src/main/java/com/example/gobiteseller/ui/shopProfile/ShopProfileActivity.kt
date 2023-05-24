@@ -6,6 +6,7 @@ import android.app.ProgressDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.e
@@ -57,6 +58,7 @@ class ShopProfileActivity : AppCompatActivity() {
     private lateinit var successSnackbar: Snackbar
     private lateinit var mShop: Shop
     private  lateinit var mImagePart: MultipartBody.Part
+    private lateinit var mYourBitmap: Bitmap
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_profile)
@@ -417,6 +419,7 @@ class ShopProfileActivity : AppCompatActivity() {
                 .galleryOnly()
                 .compress(1024)
                 .cropSquare()
+                .maxResultSize(512, 512)
                 .start()
         }
 //        binding.textCoverPhoto.setOnClickListener {
@@ -654,10 +657,12 @@ class ShopProfileActivity : AppCompatActivity() {
             if (requestCode == ImagePicker.REQUEST_CODE) {
                 val fileUri = data?.data
                 val file: File? = ImagePicker.getFile(data)
+//                val resized = Bitmap.createScaledBitmap(mYourBitmap, 300, 300, true)
 
                 val imagePart = MultipartBody.Part.createFormData("icon_file", file?.name, RequestBody.create(
                     MediaType.parse("image/*"), file!!))
                 mImagePart=imagePart
+
 
                 if(mShop.icon.isNullOrEmpty()){
                     e("uploadIcon","uploadIcon")
