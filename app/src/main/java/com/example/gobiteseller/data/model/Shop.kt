@@ -8,7 +8,7 @@ data class Shop(
     val cover_photos: List<CoverPhoto>?,
     val description: String?,
     val email: String?,
-    val icon: String?,
+    var icon: String?,
     val id: Int,
     val mobile: String?,
     val name: String?,

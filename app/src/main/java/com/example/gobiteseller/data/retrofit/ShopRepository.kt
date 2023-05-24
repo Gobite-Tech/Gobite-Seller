@@ -12,6 +12,8 @@ class ShopRepository(private val retrofit: Retrofit) {
 
     suspend fun uploadIcon(imagePart: MultipartBody.Part)=service.uploadIcon(imagePart)
 
+    suspend fun deleteShopIcon()=service.deleteShopIcon()
+
     suspend fun getShop()=service.getShop()
     suspend fun getShopsNew()=service.getShopNew()
 

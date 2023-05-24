@@ -4,6 +4,7 @@ import com.example.gobiteseller.data.model.AddItemRequest
 import com.example.gobiteseller.data.model.AddItemResponse
 import com.example.gobiteseller.data.model.AddVariant
 import com.example.gobiteseller.data.model.ConfigurationModel
+import com.example.gobiteseller.data.model.DeleteIconResponse
 import com.example.gobiteseller.data.model.DeleteRequest
 import com.example.gobiteseller.data.model.DeleteResponse
 import com.example.gobiteseller.data.model.IconResponse
@@ -34,6 +35,9 @@ import retrofit2.http.*
 interface CustomApi  {
 
     //new stuff
+
+    @DELETE("v1/shop/icon")
+    suspend fun deleteShopIcon():Response<DeleteIconResponse>
 
     @Multipart
     @POST("v1/shop/icon")

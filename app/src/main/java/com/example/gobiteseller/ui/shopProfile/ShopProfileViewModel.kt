@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gobiteseller.data.local.Resource
+import com.example.gobiteseller.data.model.DeleteIconResponse
 import com.example.gobiteseller.data.model.IconResponse
 import com.example.gobiteseller.data.model.MenuModel
 import com.example.gobiteseller.data.model.Shop
@@ -88,4 +89,34 @@ class ShopProfileViewModel (private val shopRepository: ShopRepository) : ViewMo
             }
         }
     }
+
+
+
+    //deleteSHopIcon
+    private val deleteIconRequest = MutableLiveData<Resource<DeleteIconResponse>>()
+    val deleteiconRequestResponse: LiveData<Resource<DeleteIconResponse>>
+        get() = deleteIconRequest
+
+    fun deleteShopIcon() {
+        viewModelScope.launch {
+            try {
+                deleteIconRequest.value = Resource.loading()
+                val response = shopRepository.deleteShopIcon()
+                Log.e("ic", response.toString())
+                if (response.isSuccessful) {
+                    deleteIconRequest.value = Resource.success(response.body()!!)
+                } else {
+                    deleteIconRequest.value = Resource.empty()
+                }
+            } catch (e: Exception) {
+                if (e is UnknownHostException) {
+                    deleteIconRequest.value = Resource.offlineError()
+                } else {
+                    deleteIconRequest.value = Resource.error(e)
+                }
+            }
+        }
+    }
+
+
 }

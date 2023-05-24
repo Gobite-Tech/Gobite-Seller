@@ -56,6 +56,7 @@ class ShopProfileActivity : AppCompatActivity() {
     private lateinit var updateConfigurationModel: ConfigurationModel
     private lateinit var successSnackbar: Snackbar
     private lateinit var mShop: Shop
+    private  lateinit var mImagePart: MultipartBody.Part
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_profile)
@@ -439,6 +440,52 @@ class ShopProfileActivity : AppCompatActivity() {
 
     @SuppressLint("SuspiciousIndentation")
     private fun setObserver() {
+
+        viewModel.deleteiconRequestResponse.observe(this, androidx.lifecycle.Observer { resource ->
+            if (resource != null) {
+                progressDialog.dismiss()
+                when (resource.status) {
+                    Resource.Status.SUCCESS -> {
+                        progressDialog.dismiss()
+                        resource.data?.let {
+//
+                            e("deleteShopIcon",it.message)
+                            mShop.icon=null
+                            viewModel.uploadIcon(mImagePart)
+                        }
+                    }
+                    Resource.Status.EMPTY -> {
+                        progressDialog.dismiss()
+//
+                    }
+                    Resource.Status.ERROR -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(
+                            applicationContext,
+                            "Try again!! Error Occurred \n" + resource.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    Resource.Status.OFFLINE_ERROR -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(
+                            applicationContext,
+                            "No Internet Connection",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    Resource.Status.LOADING -> {
+                        progressDialog.setMessage("Updating...")
+                        progressDialog.show()
+                    }
+
+                    else -> {}
+                }
+            }
+        })
+
         viewModel.iconRequestResponse.observe(this, androidx.lifecycle.Observer { resource ->
             if (resource != null) {
                 progressDialog.dismiss()
@@ -452,6 +499,7 @@ class ShopProfileActivity : AppCompatActivity() {
 //                                isShopCoverImageClicked = !isShopCoverImageClicked
 //                            } else if (isShopLogoClicked) {
 //                                photoUrl = resource.data
+                                mShop.icon=resource.data.data.icon
                                 Picasso.get().load(resource.data.data.icon)
                                     .placeholder(R.drawable.ic_shop)
                                     .into(binding.imageLogo)
@@ -461,11 +509,12 @@ class ShopProfileActivity : AppCompatActivity() {
                     }
                     Resource.Status.EMPTY -> {
                         progressDialog.dismiss()
-                        Toast.makeText(
-                            applicationContext,
-                            "Try again!! Error Occurred " + resource.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
+//                        Toast.makeText(
+//                            applicationContext,
+//                            "Try again!! Error Occurred " + resource.message,
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+
                     }
                     Resource.Status.ERROR -> {
                         progressDialog.dismiss()
@@ -607,10 +656,16 @@ class ShopProfileActivity : AppCompatActivity() {
                 val file: File? = ImagePicker.getFile(data)
 
                 val imagePart = MultipartBody.Part.createFormData("icon_file", file?.name, RequestBody.create(
-                    MediaType.parse("image/png"), file!!))
+                    MediaType.parse("image/*"), file!!))
+                mImagePart=imagePart
 
+                if(mShop.icon.isNullOrEmpty()){
+                    e("uploadIcon","uploadIcon")
+                    viewModel.uploadIcon(imagePart)
+                }else{
+                    viewModel.deleteShopIcon()
+                }
 
-                viewModel.uploadIcon(imagePart)
 //                var storageReference: StorageReference? = null
 //                if (isShopLogoClicked) {
 //                    storageReference =
