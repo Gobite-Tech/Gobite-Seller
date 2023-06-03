@@ -1,5 +1,7 @@
 package com.example.gobiteseller.ui.orderdetails
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.e
@@ -51,6 +53,12 @@ class OrderDetailActivity : AppCompatActivity() {
         binding.textOrderStatus.text=order.order_status
 
         binding.textItemTotalPrice.text = "₹" + order.price?.toInt().toString()
+
+        binding.imageCall.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:${order.customer_mobile}")
+            startActivity(intent)
+        }
 
         setupShopRecyclerView()
 

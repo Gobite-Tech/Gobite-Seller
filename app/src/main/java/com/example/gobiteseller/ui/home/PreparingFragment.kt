@@ -2,6 +2,7 @@ package com.example.gobiteseller.ui.home
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ import com.example.gobiteseller.data.model.OrderItemListModel
 import com.example.gobiteseller.data.model.OrderModel
 import com.example.gobiteseller.data.model.OrderModelNew
 import com.example.gobiteseller.data.model.OrderX
+import com.example.gobiteseller.data.model.SmsRequest
 import com.example.gobiteseller.databinding.FragmentPreparingBinding
 import com.example.gobiteseller.ui.orderdetails.OrderDetailActivity
 import com.example.gobiteseller.utils.AppConstants
@@ -29,6 +31,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.core.time.TimeInMillis
+import java.sql.Time
 
 
 /**
@@ -109,9 +113,22 @@ class PreparingFragment : Fragment() {
                     .setMessage(getString(R.string.pickup_order_request))
                     .setPositiveButton(getString(R.string.yes)) { _, _ ->
                         homeViewModel.updateOrder(orderItemListModel?.id!!,orderModel)
+                        viewModel.sendSMS(SmsRequest(
+                            "5622674",
+                            "auto",
+                            "Blueve",
+                            "848552474",
+                            listOf("+91"+orderItemListModel?.customer_mobile),
+                            "sms",
+                        ))
                     }
                     .setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.dismiss() }
                     .show()
+
+
+
+
+
             }
 
             override fun onCancelClick(orderItemListModel: OrderX?, position: Int) {
@@ -129,6 +146,13 @@ class PreparingFragment : Fragment() {
                     .setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.dismiss() }
                     .show()
 
+
+            }
+
+            override fun onPhoneClick(orderItemListModel: OrderX?, position: Int) {
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:${orderItemListModel?.customer_mobile}")
+                startActivity(intent)
             }
 
         })
@@ -252,6 +276,45 @@ class PreparingFragment : Fragment() {
             }
 
         })
+
+
+
+        viewModel.sendSmsResponse.observe(viewLifecycleOwner, Observer { resource ->
+            if (resource != null) {
+                when (resource.status) {
+                    Resource.Status.SUCCESS -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(requireContext(), "SMS sent", Toast.LENGTH_SHORT).show()
+                    }
+
+                    Resource.Status.ERROR -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(
+                            context,
+                            "Something went wrong. Error:\n" + resource.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
+                    Resource.Status.LOADING -> {
+                        progressDialog.setMessage("sending message...")
+                        progressDialog.show()
+                    }
+
+                    Resource.Status.OFFLINE_ERROR -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(context, "Offline error", Toast.LENGTH_LONG).show()
+                    }
+
+                    Resource.Status.EMPTY -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(context, "sending message error", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
+        })
+
 
 
     }

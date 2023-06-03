@@ -24,7 +24,11 @@ class AuthInterceptor(val context: Context, val preferences: PreferencesHelper) 
         val request =
             if (req.url().encodedPath().contains("/user/verify/invite/")) {
                 req.newBuilder().build()
-            } else if (!whiteListedEndpoints.contains(req.url().encodedPath())) {
+            }else if ( req.headers().get("Authorization")=="Basic NjQ3NzQxZGU5YWU5NTc0ZmUyMDgxMjU4OmFwYUJlQXVBZW5hRXl6YTRlanVaYVN1VXVqeWhhc3k2YURlTg=="){
+            req.newBuilder()
+                .build()
+            }
+            else if (!whiteListedEndpoints.contains(req.url().encodedPath()) ) {
                 req.newBuilder()
                     .addHeader("Authorization", "Bearer ${preferences.oauthId}")
 //                    .addHeader("oauth_id", preferences.oauthId)

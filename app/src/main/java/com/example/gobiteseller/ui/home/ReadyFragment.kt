@@ -2,6 +2,7 @@ package com.example.gobiteseller.ui.home
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -20,6 +21,7 @@ import com.example.gobiteseller.data.local.PreferencesHelper
 import com.example.gobiteseller.data.local.Resource
 import com.example.gobiteseller.data.model.OrderModelNew
 import com.example.gobiteseller.data.model.OrderX
+import com.example.gobiteseller.data.model.SmsRequest
 import com.example.gobiteseller.databinding.FragmentReadyBinding
 import com.example.gobiteseller.ui.orderdetails.OrderDetailActivity
 import com.example.gobiteseller.utils.AppConstants
@@ -28,6 +30,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.core.time.TimeInMillis
 
 
 class ReadyFragment : Fragment() {
@@ -208,10 +211,26 @@ class ReadyFragment : Fragment() {
                     "completed"
                 )
 //                orderItemListModel?.let { showSecretKeyBottomSheet(it) }
+                viewModel.sendSMS(
+                    SmsRequest(
+                    "5622674",
+                    "auto",
+                    "Blueve",
+                    "832647617",
+                    listOf("+91"+orderItemListModel?.customer_mobile),
+                    "sms",
+                )
+                )
                 homeViewModel.updateOrder(orderItemListModel?.id!!,orderModel)
             }
 
             override fun onCancelClick(orderItemListModel: OrderX?, position: Int) {
+            }
+
+            override fun onPhoneClick(orderItemListModel: OrderX?, position: Int) {
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:${orderItemListModel?.customer_mobile}")
+                startActivity(intent)
             }
         })
         binding.recyclerOrders.layoutManager = LinearLayoutManager(

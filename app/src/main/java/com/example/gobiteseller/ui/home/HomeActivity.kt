@@ -438,7 +438,7 @@ class HomeActivity : AppCompatActivity() {
         e("resume","hua")
 
 //        initView()
-        getShopDetails()
+//        getShopDetails()
         binding.textShopName.text=preferencesHelper.name
         updateHeaderLayoutUI()
 

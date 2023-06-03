@@ -17,12 +17,14 @@ import com.example.gobiteseller.data.model.OrderByShopIdModel
 import com.example.gobiteseller.data.model.OrderItemListModel
 import com.example.gobiteseller.data.model.OrderModel
 import com.example.gobiteseller.data.model.OrderModelNew
+import com.example.gobiteseller.data.model.SMSResponse
 import com.example.gobiteseller.data.model.Shop
 import com.example.gobiteseller.data.model.ShopConfigurationModel
 import com.example.gobiteseller.data.model.ShopUpdateRequestTemp
 import com.example.gobiteseller.data.model.Shops
 import com.example.gobiteseller.data.model.SignUpRequest
 import com.example.gobiteseller.data.model.SignUpResponse
+import com.example.gobiteseller.data.model.SmsRequest
 import com.example.gobiteseller.data.model.UserModel
 import com.example.gobiteseller.data.model.UserShopListModel
 import com.example.gobiteseller.data.model.Variant
@@ -35,6 +37,13 @@ import retrofit2.http.*
 interface CustomApi  {
 
     //new stuff
+
+    @POST()
+    @Headers(
+        "Authorization:Basic NjQ3NzQxZGU5YWU5NTc0ZmUyMDgxMjU4OmFwYUJlQXVBZW5hRXl6YTRlanVaYVN1VXVqeWhhc3k2YURlTg==",
+        "Content-Type:application/json"
+        )
+    suspend fun sendSMS(@Url url:String,@Body smsRequest: SmsRequest):Response<SMSResponse>
 
     @DELETE("v1/shop/icon")
     suspend fun deleteShopIcon():Response<DeleteIconResponse>

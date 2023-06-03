@@ -1,9 +1,12 @@
 package com.example.gobiteseller.ui.home
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gobiteseller.R
@@ -89,6 +92,7 @@ class OrdersAdapter(
             binding.layoutRoot.setOnClickListener { listener.onItemClick(order, position) }
             binding.textUpdateStatus.setOnClickListener { listener.onUpdateClick(order, position) }
             binding.textCancel.setOnClickListener { listener.onCancelClick(order, position) }
+            binding.ivOrderCall.setOnClickListener { listener.onPhoneClick(order, position) }
 
         }
 
@@ -98,6 +102,7 @@ class OrdersAdapter(
         fun onItemClick(orderItemListModel: OrderX?, position: Int)
         fun onUpdateClick(orderItemListModel: OrderX?, position: Int)
         fun onCancelClick(orderItemListModel: OrderX?, position: Int)
+        fun onPhoneClick(orderItemListModel: OrderX?, position: Int)
     }
 
     /* * Update order status

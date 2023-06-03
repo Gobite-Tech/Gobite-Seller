@@ -2,6 +2,7 @@ package com.example.gobiteseller.ui.home
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log.e
@@ -21,6 +22,7 @@ import com.example.gobiteseller.data.local.Resource
 import com.example.gobiteseller.data.model.OrderByIdModel
 import com.example.gobiteseller.data.model.OrderModelNew
 import com.example.gobiteseller.data.model.OrderX
+import com.example.gobiteseller.data.model.SmsRequest
 import com.example.gobiteseller.databinding.FragmentNewOrdersBinding
 import com.example.gobiteseller.ui.orderdetails.OrderDetailActivity
 import com.example.gobiteseller.utils.AppConstants
@@ -201,9 +203,24 @@ class NewOrdersFragment : Fragment() {
                     .setMessage(getString(R.string.accept_order_request))
                     .setPositiveButton(getString(R.string.yes)) { _, _ ->
                         homeViewModel.updateOrder(orderItemListModel?.id!!,orderModel)
+
+                        viewModel.sendSMS(
+                            SmsRequest(
+                                "5622674",
+                                "auto",
+                                "Blueve",
+                                "217424069",
+                                listOf("+91"+orderItemListModel?.customer_mobile),
+                                "sms",
+                            )
+                        )
+
                     }
                     .setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.dismiss() }
                     .show()
+
+
+
 
             }
 
@@ -222,6 +239,14 @@ class NewOrdersFragment : Fragment() {
                     .show()
 
             }
+
+            override fun onPhoneClick(orderItemListModel: OrderX?, position: Int) {
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:${orderItemListModel?.customer_mobile}")
+                startActivity(intent)
+            }
+
+
         })
         binding.recyclerOrders.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

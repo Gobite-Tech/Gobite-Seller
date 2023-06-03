@@ -2,6 +2,7 @@ package com.example.gobiteseller.ui.orderHistory
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -74,6 +75,12 @@ class OrderHistoryActivity : AppCompatActivity() {
             override fun onItemClick(item: OrderX?, position: Int) {
                 val intent = Intent(applicationContext, OrderDetailActivity::class.java)
                 intent.putExtra(AppConstants.ORDER_DETAIL, Gson().toJson(item))
+                startActivity(intent)
+            }
+
+            override fun onPhoneClick(orderItemListModel: OrderX?, position: Int) {
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:${orderItemListModel?.customer_mobile}")
                 startActivity(intent)
             }
         })

@@ -1,5 +1,6 @@
 package com.example.gobiteseller.ui.home
 
+import android.util.Log.e
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,8 @@ import com.example.gobiteseller.data.local.PreferencesHelper
 import com.example.gobiteseller.data.local.Resource
 import com.example.gobiteseller.data.model.OrderByIdModel
 import com.example.gobiteseller.data.model.OrderByShopIdModel
+import com.example.gobiteseller.data.model.SMSResponse
+import com.example.gobiteseller.data.model.SmsRequest
 import com.example.gobiteseller.data.retrofit.OrderRepository
 import com.example.gobiteseller.data.retrofit.ShopRepository
 import com.example.gobiteseller.data.retrofit.UserRespository
@@ -51,6 +54,30 @@ class OrderViewModel(
     }
 
     /*****************************************************************************/
+
+    private val sendSms = MutableLiveData<Resource<SMSResponse>>()
+    val sendSmsResponse: LiveData<Resource<SMSResponse>>
+        get() = sendSms
+
+    fun sendSMS(smsRequest: SmsRequest) {
+        viewModelScope.launch {
+            try {
+                sendSms.value = Resource.loading()
+
+                e("kaam","kia")
+                val response = orderRepository.sendSMS(smsRequest)
+
+                    sendSms.value = Resource.success(response.body()!!)
+
+            } catch (e: Exception) {
+                if (e is UnknownHostException) {
+                    sendSms.value = Resource.offlineError()
+                } else {
+                    sendSms.value = Resource.error(e)
+                }
+            }
+        }
+    }
 
 //    private val getShopDetail = MutableLiveData<Resource<ShopConfigurationModel>>()
 //    val getShopDetailResponse: LiveData<Resource<ShopConfigurationModel>>

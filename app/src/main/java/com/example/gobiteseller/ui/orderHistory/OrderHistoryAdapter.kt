@@ -55,11 +55,13 @@ class OrderHistoryAdapter(private val orderList: List<OrderX>, private val liste
 //            binding.textViewMore.visibility = if (order.orderItemsList.size > 2)  View.VISIBLE else View.GONE
             binding.textOrderStatus.text = order.order_status
             binding.layoutRoot.setOnClickListener { listener.onItemClick(order, position) }
+            binding.ivOrderCallHistory.setOnClickListener { listener.onPhoneClick(order, position) }
 //            binding.buttonViewOrder.setOnClickListener{ listener.onItemClick(order, position) }
         }
     }
 
     interface OnItemClickListener {
         fun onItemClick(item: OrderX?, position: Int)
+        fun onPhoneClick(orderItemListModel: OrderX?, position: Int)
     }
 }

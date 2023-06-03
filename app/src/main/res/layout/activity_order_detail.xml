@@ -78,7 +78,6 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:layout_gravity="center"
-                            android:visibility="gone"
                             android:src="@drawable/ic_call_white" />
 
                     </LinearLayout>

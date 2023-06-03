@@ -68,13 +68,14 @@
 					android:layout_marginStart="16dp"
 					android:orientation="vertical">
 
-					<TextView
+					<ImageView
+						android:id="@+id/iv_order_call_history"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_gravity="end"
 						android:fontFamily="@font/open_sans_bold"
 						android:gravity="end"
-						android:text="ORDER ID"
+						android:src="@drawable/baseline_phone_24"
 						android:textColor="@android:color/tab_indicator_text"
 						android:textSize="10sp" />
 
@@ -88,6 +89,7 @@
 						android:gravity="end"
 						android:textColor="@color/colorAccentLight"
 						android:textSize="14sp"
+						android:visibility="gone"
 						tools:text="#123123" />
 				</LinearLayout>
 

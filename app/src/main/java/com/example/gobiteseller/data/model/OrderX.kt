@@ -4,6 +4,7 @@ data class OrderX(
     val created_at: String,
     val customer_id: Int,
     val customer_name:String,
+    val customer_mobile:String?,
     val deleted: Boolean,
     val id: String,
     val items: List<ItemXX>,
