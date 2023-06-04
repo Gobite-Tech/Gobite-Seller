@@ -7,6 +7,7 @@ import com.example.gobiteseller.data.model.ConfigurationModel
 import com.example.gobiteseller.data.model.DeleteIconResponse
 import com.example.gobiteseller.data.model.DeleteRequest
 import com.example.gobiteseller.data.model.DeleteResponse
+import com.example.gobiteseller.data.model.EnablexOTPModel
 import com.example.gobiteseller.data.model.IconResponse
 import com.example.gobiteseller.data.model.ItemModel
 import com.example.gobiteseller.data.model.LoginRequest
@@ -37,6 +38,14 @@ import retrofit2.http.*
 interface CustomApi  {
 
     //new stuff
+
+
+    @POST
+    @Headers(
+        "Authorization:Basic NjQ3NzQxZGU5YWU5NTc0ZmUyMDgxMjU4OmFwYUJlQXVBZW5hRXl6YTRlanVaYVN1VXVqeWhhc3k2YURlTg==",
+        "Content-Type:application/json"
+    )
+    suspend fun sendOTP(@Url url : String ,@Body sendOtpModel: EnablexOTPModel) : Response<SMSResponse>
 
     @POST()
     @Headers(

@@ -6,8 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gobiteseller.data.local.Resource
+import com.example.gobiteseller.data.model.EnablexOTPModel
 import com.example.gobiteseller.data.model.LoginRequest
 import com.example.gobiteseller.data.model.LoginResponse
+import com.example.gobiteseller.data.model.SMSResponse
 import com.example.gobiteseller.data.retrofit.UserRespository
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
@@ -35,5 +37,30 @@ class LoginViewModel(private val userRepository: UserRespository): ViewModel() {
             }
         }
     }
+
+
+    //Send OTP
+    private val performSendOTP = MutableLiveData<Resource<SMSResponse>>()
+    val performSendOTPStatus: LiveData<Resource<SMSResponse>>
+        get() = performSendOTP
+
+    fun sendOTP(sendOtpModel: EnablexOTPModel) {
+        viewModelScope.launch {
+            try {
+                performSendOTP.value = Resource.loading()
+                val response = userRepository.sendOTP(sendOtpModel)
+                performSendOTP.value = Resource.success(response.body()!!)
+
+            } catch (e: Exception) {
+                println("login failed ${e.message}")
+                if (e is UnknownHostException) {
+                    performSendOTP.value = Resource.offlineError()
+                } else {
+                    performSendOTP.value = Resource.error(e)
+                }
+            }
+        }
+    }
+
 
 }

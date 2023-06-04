@@ -1,5 +1,6 @@
 package com.example.gobiteseller.data.retrofit
 
+import com.example.gobiteseller.data.model.EnablexOTPModel
 import com.example.gobiteseller.data.model.LoginRequest
 import com.example.gobiteseller.data.model.SignUpRequest
 import com.example.gobiteseller.data.model.UserModel
@@ -8,6 +9,8 @@ import retrofit2.Retrofit
 
 class UserRespository(retofit: Retrofit) {
     val service = retofit.create(CustomApi::class.java)
+
+    suspend fun sendOTP(sendOtpModel: EnablexOTPModel) = service.sendOTP("https://api.enablex.io/sms/v1/messages/",sendOtpModel)
 
     suspend fun loginNew(loginReq:LoginRequest) = service.loginNew(loginReq)
 
