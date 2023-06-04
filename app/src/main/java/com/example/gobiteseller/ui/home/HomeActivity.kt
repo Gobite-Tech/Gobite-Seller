@@ -57,6 +57,8 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var errorSnackBar: Snackbar
     private var shopConfig: ShopConfigurationModel? = null
     private lateinit var mShopDetails : Shop
+    private var flag=0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -95,6 +97,8 @@ class HomeActivity : AppCompatActivity() {
                     preferencesHelper.name?.get(0).toString().capitalize(),
                     ContextCompat.getColor(this, R.color.colorAccent)
                 )
+
+
             headerLayout.imageProfilePic.setImageDrawable(textDrawable)
         }
 
@@ -214,6 +218,7 @@ class HomeActivity : AppCompatActivity() {
                                 "shop",
                                 " Result - ${resource.data} and ${resource.data.success} and ${resource.data.message}"
                             )
+                            flag=1
 
                             if(shopResult.data.shop.name !=null){
                                 preferencesHelper.currentShop =
@@ -434,11 +439,15 @@ class HomeActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        //todo order wale
-        e("resume","hua")
+
 
 //        initView()
 //        getShopDetails()
+        if(AppConstants.update_hua==1){
+            AppConstants.update_hua=0
+            getShopDetails()
+            e("resume","hua")
+        }
         binding.textShopName.text=preferencesHelper.name
         updateHeaderLayoutUI()
 

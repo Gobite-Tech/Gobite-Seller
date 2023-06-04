@@ -56,6 +56,7 @@ object AppConstants {
     const val INTENT_UPDATED_ITEM_CATEGORY = "updated_item_category"
     const val URL = "URL"
     const val NOTIFICATION_TITLE = "NOTIFICATION_TITLE"
+     var update_hua=0
 
 
 

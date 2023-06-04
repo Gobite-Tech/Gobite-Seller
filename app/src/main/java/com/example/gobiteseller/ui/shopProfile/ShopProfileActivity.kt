@@ -553,7 +553,7 @@ class ShopProfileActivity : AppCompatActivity() {
                 if (resource != null) {
                     when (resource.status) {
                         Resource.Status.SUCCESS -> {
-
+                            AppConstants.update_hua=1
                             preferencesHelper.name= resource.data?.data?.shop?.name
 //                            preferencesHelper.getShop()?.let { shopConfigurationList ->
 //                                for (i in shopConfigurationList)
