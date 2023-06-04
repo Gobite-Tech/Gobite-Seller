@@ -13,6 +13,7 @@ class ItemRepository(private val retrofit: Retrofit) {
     val service = retrofit.create(CustomApi::class.java)
 
     //new
+    suspend fun deleteMenuIcon(itemId: String)=service.deleteMenuIcon(itemId)
     suspend fun uploadMenuIcon(itemId: String,imagePart: MultipartBody.Part)=service.uploadMenuIcon(itemId,imagePart)
     suspend fun addVariantNew(itemId:String,addVariantRequest: AddVariant)=service.addVariant(itemId,addVariantRequest)
 

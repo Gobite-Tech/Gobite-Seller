@@ -54,6 +54,9 @@ interface CustomApi  {
         )
     suspend fun sendSMS(@Url url:String,@Body smsRequest: SmsRequest):Response<SMSResponse>
 
+    @DELETE("v1/shop/item/{itemId}/icon")
+    suspend fun deleteMenuIcon(@Path("itemId") itemId: String):Response<AddItemResponse>
+
     @DELETE("v1/shop/icon")
     suspend fun deleteShopIcon():Response<DeleteIconResponse>
 

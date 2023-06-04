@@ -185,6 +185,29 @@ class MenuItemViewModel(
     }
 
 
+    private val deleteMenuIconRequest = MutableLiveData<Resource<AddItemResponse>>()
+    val deleteMenuIconRequestResponse: LiveData<Resource<AddItemResponse>>
+        get() = deleteMenuIconRequest
+    fun deleteItemIcon(mItemID: String) {
+
+        viewModelScope.launch {
+            try {
+                deleteMenuIconRequest.value = Resource.loading()
+                val response = itemRepository.deleteMenuIcon(mItemID)
+                if (response.isSuccessful) {
+                    deleteMenuIconRequest.value = Resource.success(response.body()!!)
+                } else {
+                    deleteMenuIconRequest.value = Resource.empty()
+                }
+            } catch (e: Exception) {
+                if (e is UnknownHostException) {
+                    deleteMenuIconRequest.value = Resource.offlineError()
+                } else {
+                    deleteMenuIconRequest.value = Resource.error(e)
+                }
+            }
+        }
+    }
 
 
 }

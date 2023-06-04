@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(!preferencesHelper.oauthId.isNullOrEmpty()){
+        if(!preferencesHelper.oauthId.isNullOrEmpty() ){
             e("preferencesHelper.oauthId",preferencesHelper.oauthId.toString())
             startActivity(Intent(applicationContext, HomeActivity::class.java))
             finish()
@@ -81,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
         val email=binding.editEmail.text.toString()
         if (phoneNo.isNotEmpty() && phoneNo.length==10 && phoneNo.matches(Regex("\\d+")) && email.isNotEmpty() &&  android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             preferencesHelper.mobile = phoneNo
-            var otp : Int = 0
+            var otp :Int = 0
                 try {
                     val secureRandom = SecureRandom.getInstanceStrong()
                     otp = secureRandom.nextInt(900000) + 100000

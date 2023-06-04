@@ -54,6 +54,8 @@ class MenuItemsActivity : AppCompatActivity() {
     private var mStorageRef: StorageReference? = null
     private var variantPrice:Double=0.0
     private var mItemID=""
+    private var alreadyImage=0
+    private  lateinit var mImagePart: MultipartBody.Part
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -313,6 +315,14 @@ class MenuItemsActivity : AppCompatActivity() {
                             Picasso.get().load(resource.data?.data?.item?.icon!!)
                                 .placeholder(R.drawable.ic_food)
                                 .into(dialogBinding.imageItem)
+
+                            for(i in menuItemList.indices){
+                                if(menuItemList[i].id==it.data.item.id){
+                                    menuItemList[i].icon=it.data.item.icon
+                                    break
+                                }
+                            }
+                            menuAdapter.notifyDataSetChanged()
                         }
                     }
                     Resource.Status.EMPTY -> {
@@ -571,6 +581,50 @@ class MenuItemsActivity : AppCompatActivity() {
                 binding.buttonSaveChanges.visibility = View.GONE
             }
         })
+
+        viewModel.deleteMenuIconRequestResponse.observe(this, androidx.lifecycle.Observer { resource ->
+            if (resource != null) {
+                progressDialog.dismiss()
+                when (resource.status) {
+                    Resource.Status.SUCCESS -> {
+                        progressDialog.dismiss()
+                        resource.data?.let {
+//
+                            e("deleteitemIcon",it.message)
+                            viewModel.uploadIcon(mItemID,mImagePart)
+                        }
+                    }
+                    Resource.Status.EMPTY -> {
+                        progressDialog.dismiss()
+//
+                    }
+                    Resource.Status.ERROR -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(
+                            applicationContext,
+                            "Try again!! Error Occurred \n" + resource.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    Resource.Status.OFFLINE_ERROR -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(
+                            applicationContext,
+                            "No Internet Connection",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    Resource.Status.LOADING -> {
+                        progressDialog.setMessage("Updating...")
+                        progressDialog.show()
+                    }
+
+                    else -> {}
+                }
+            }
+        })
     }
 
     private fun updateList(itemModelList: ArrayList<DataXXXX>) {
@@ -609,6 +663,10 @@ class MenuItemsActivity : AppCompatActivity() {
             .into(dialogBinding.imageItem)
 
         if (item != null) {
+            if(!item.icon.isNullOrEmpty()){
+                alreadyImage=1
+            }else alreadyImage=0
+
             mItemID=item.id
             dialogBinding.editItemName.setText(item.name)
             dialogBinding.editItemPrice.setText(item.variants[item.variants.size-1].price.toInt().toString())
@@ -754,7 +812,9 @@ class MenuItemsActivity : AppCompatActivity() {
         dialogBinding.textChangeImage.setOnClickListener { v ->
             ImagePicker.with(this)
                 .galleryOnly()
+                .compress(1024)
                 .cropSquare()
+                .maxResultSize(512, 512)
                 .start()
         }
     }
@@ -776,10 +836,17 @@ class MenuItemsActivity : AppCompatActivity() {
                 val file: File? = ImagePicker.getFile(data)
 
                 val imagePart = MultipartBody.Part.createFormData("icon_file", file?.name, RequestBody.create(
-                    MediaType.parse("image/png"), file!!))
+                    MediaType.parse("image/*"), file!!))
+                mImagePart=imagePart
 
 
-                viewModel.uploadIcon(mItemID,imagePart)
+                if(alreadyImage==0){
+                    e("uploaditemIcon","khalitha")
+                    viewModel.uploadIcon(mItemID,imagePart)
+                }else{
+                    e("uploaditemIcon","bharatha")
+                    viewModel.deleteItemIcon(mItemID)
+                }
 
 //                var storageReference: StorageReference? = null
 //                storageReference =
