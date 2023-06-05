@@ -141,17 +141,19 @@ interface CustomApi  {
 
     // Order Repository
 
+    //new again
+
     @GET("v1/shop/order/{orderId}")
     suspend fun getOrderById(@Path("orderId") orderId: String): Response<OrderByIdModel>
 
-    @GET("/order/seller/{shopId}/{pageNum}/{pageCnt}")
-    suspend fun getOrderByPagination(@Path("shopId") shopId: Int,@Path("pageNum") pageNum: Int,@Path("pageCnt") pageCnt: Int): Response<List<OrderItemListModel>>
+    @GET("v1/shop/order")
+    suspend fun getOrderByPagination(@Header("Authorization")  authToken:String,@Query("page_size")pageSize:Int=25,@Query("sort_order")sortOrder:String="DESC",@Query("next_page_token")nxtPageToken:String): Response<OrderByShopIdModel>
 
     @GET("/order/{shopId}/{searchItem}/{pageNum}/{pageCount}")
     suspend fun getOrderBySearchItem(@Path("shopId") shopId: Int, @Path("searchItem") searchItem: String, @Path("pageNum") pageNum: Int, @Path("pageCount") pageCnt: Int): Response<List<OrderItemListModel>>
 
     @GET("v1/shop/order")
-    suspend fun getOrderByShopId(@Header("Authorization")  authToken:String): Response<OrderByShopIdModel>
+    suspend fun getOrderByShopId(@Header("Authorization")  authToken:String,@Query("page_size")pageSize:Int=25,@Query("sort_order")sortOrder:String="DESC" ): Response<OrderByShopIdModel>
 
     @PUT("v1/shop/order/{orderid}")
     suspend fun updateOrderStatus(@Path("orderid") id : String , @Body order: OrderModelNew) : Response<OrderByIdModel>

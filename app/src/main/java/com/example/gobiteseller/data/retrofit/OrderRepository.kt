@@ -14,7 +14,7 @@ class OrderRepository(private val retrofit: Retrofit) {
 
     suspend fun getOrderByShopId(authToken:String) = service.getOrderByShopId(authToken)
 
-    suspend fun getOrderByPagination(shopId: Int,pageNum: Int,pageCnt: Int) = service.getOrderByPagination(shopId,pageNum,pageCnt)
+    suspend fun getOrderByPagination(authToken:String,nxtpageToken:String) = service.getOrderByPagination(authToken,25,"DESC",nxtpageToken)
 
     suspend fun getOrderBySearchItem(shopId: Int,searchItem: String,pageNum: Int,pageCnt: Int) = service.getOrderBySearchItem(shopId,searchItem,pageNum,pageCnt)
 

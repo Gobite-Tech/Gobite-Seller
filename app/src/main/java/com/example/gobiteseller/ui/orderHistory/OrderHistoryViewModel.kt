@@ -16,7 +16,7 @@ class OrderHistoryViewModel(private val orderRepository: OrderRepository) : View
     val orderByShopIdResponse: LiveData<Resource<OrderByShopIdModel>>
         get() = orderByShopId
 
-    fun getOrderByShopId(authID: String) {
+    fun getOrderByShopId(authID: String,nxtID: String) {
         viewModelScope.launch {
             try {
                 orderByShopId.value = Resource.loading()
@@ -31,6 +31,32 @@ class OrderHistoryViewModel(private val orderRepository: OrderRepository) : View
                     orderByShopId.value = Resource.offlineError()
                 } else {
                     orderByShopId.value = Resource.error(e)
+                }
+            }
+        }
+    }
+
+    //pagination
+
+    private val pageOrderByShopId = MutableLiveData<Resource<OrderByShopIdModel>>()
+    val pageOrderByShopIdResponse: LiveData<Resource<OrderByShopIdModel>>
+        get() = pageOrderByShopId
+
+    fun getPageOrderByShopId(authID: String,nxtID: String) {
+        viewModelScope.launch {
+            try {
+                pageOrderByShopId.value = Resource.loading()
+                val response = orderRepository.getOrderByPagination(authID,nxtID)
+                if (response.isSuccessful) {
+                    pageOrderByShopId.value = Resource.success(response.body()!!)
+                } else {
+                    orderByShopId.value = Resource.empty()
+                }
+            } catch (e: Exception) {
+                if (e is UnknownHostException) {
+                    pageOrderByShopId.value = Resource.offlineError()
+                } else {
+                    pageOrderByShopId.value = Resource.error(e)
                 }
             }
         }
