@@ -51,7 +51,7 @@
                                 android:layout_marginRight="16dp"
                                 android:scaleType="fitCenter"
                                 android:src="@drawable/ic_menu_white_24dp"
-                                android:visibility="visible"
+                                android:visibility="gone"
                                 app:tint="@android:color/white" />
 
                             <View
@@ -59,10 +59,7 @@
                                 android:layout_height="1dp"
                                 android:layout_weight="1" />
 
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/image_company"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp" />
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -84,19 +81,11 @@
                                 android:textAppearance="@style/AppbarTitle"
                                 android:textColor="@android:color/white" />
 
-                            <TextView
-                                android:id="@+id/text_shop_rating"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:drawableStart="@drawable/ic_star_white"
-                                android:drawablePadding="4dp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:gravity="right"
-                                tools:text=" 4.5"
-                                android:visibility="invisible"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/image_company"
+                                android:src="@drawable/ic_shop"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp" />
                         </LinearLayout>
 
 

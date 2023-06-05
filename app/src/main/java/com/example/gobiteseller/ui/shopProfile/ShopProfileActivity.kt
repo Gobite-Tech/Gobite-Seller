@@ -582,7 +582,7 @@ class ShopProfileActivity : AppCompatActivity() {
                             } ?: run {
                                 Toast.makeText(
                                     applicationContext,
-                                    "Update Failed Try again later",
+                                    "Check IFSC/ACCOUNT NUMBER \n Try again ",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }

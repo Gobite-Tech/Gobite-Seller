@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.Log.e
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewTreeObserver
@@ -72,7 +73,7 @@ class HomeActivity : AppCompatActivity() {
             false
         )
 
-        binding.imageMenu.setOnClickListener {
+        binding.imageCompany.setOnClickListener {
             drawer.openDrawer()
         }
 
@@ -369,6 +370,8 @@ class HomeActivity : AppCompatActivity() {
                 DividerDrawerItem(),
                 signOutItem
             )
+            .withDrawerGravity(Gravity.RIGHT)
+
             .withOnDrawerItemClickListener { _, _, drawerItem ->
 //                if (profileItem.identifier == drawerItem.identifier) {
 //                    startActivity(Intent(applicationContext, ProfileActivity::class.java))
