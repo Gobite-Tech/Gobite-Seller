@@ -284,7 +284,6 @@ class PreparingFragment : Fragment() {
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
                         progressDialog.dismiss()
-                        Toast.makeText(requireContext(), "SMS sent", Toast.LENGTH_SHORT).show()
                     }
 
                     Resource.Status.ERROR -> {
