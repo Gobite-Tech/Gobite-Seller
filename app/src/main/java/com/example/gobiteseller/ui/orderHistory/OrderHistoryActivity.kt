@@ -133,8 +133,11 @@ class OrderHistoryActivity : AppCompatActivity() {
                             }
                         }
                     }
-                    nxtToken=resource.data?.data?.next_page_token!!
+
                     orderAdapter.notifyDataSetChanged()
+                    if(!resource.data?.data?.next_page_token.isNullOrEmpty()) {
+                        nxtToken = resource.data?.data?.next_page_token!!
+                    }
                     if (orderList.isEmpty()) {
 //                        showEmptyStateAnimation()
                     } else {
@@ -144,7 +147,7 @@ class OrderHistoryActivity : AppCompatActivity() {
                         errorSnackBar.dismiss()
                     }
 
-                    if(resource.data.data.next_page_token?.isNullOrEmpty() == true){
+                    if(resource.data?.data?.next_page_token?.isNullOrEmpty() == true){
                         isLoading=true
                     }
 
