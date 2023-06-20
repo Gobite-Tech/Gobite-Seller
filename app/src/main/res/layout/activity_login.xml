@@ -38,7 +38,7 @@
                     android:fontFamily="@font/poppins_bold"
                     android:gravity="center|start"
                     android:paddingTop="3dp"
-                    android:text="Welcome to\nGoBite Partner"
+                    android:text="Welcome to\nGobite Partners"
                     android:textAppearance="@style/AppbarTitle"
                     android:textColor="@android:color/black"
                     android:textSize="32sp" />

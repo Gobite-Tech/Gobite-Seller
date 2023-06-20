@@ -117,6 +117,7 @@ class ShopProfileActivity : AppCompatActivity() {
         Picasso.get().load(mShop.icon).placeholder(R.drawable.ic_shop)
             .into(binding.imageLogo)
         binding.switchOrders.isChecked = mShop.status == "ACTIVE"
+        binding.switchOrders.isClickable=false
         binding.editAccountHolder.setText((mShop.payment?.account_holder))
         binding.editAccountIfsc.setText((mShop.payment?.account_ifsc))
         binding.editAccountNumber.setText((mShop.payment?.account_number))

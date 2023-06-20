@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initView() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-        val text = "<font color=#000000>Welcome to</font> <br> <font color=#000000>GoBite</font> <font color=#FF4141> Partner</font>"
+        val text = "<font color=#000000>Welcome to</font> <br> <font color=#000000>Gobite</font> <font color=#FF4141> Partners</font>"
         binding.textWelcome.text = Html.fromHtml(text)
         progressDialog = ProgressDialog(this)
         progressDialog.setCancelable(false)
@@ -81,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
         val email=binding.editEmail.text.toString()
         if (phoneNo.isNotEmpty() && phoneNo.length==10 && phoneNo.matches(Regex("\\d+")) && email.isNotEmpty() &&  android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             preferencesHelper.mobile = phoneNo
-            var otp :Int = 0
+            var otp:Int = 0
                 try {
                     val secureRandom = SecureRandom.getInstanceStrong()
                     otp = secureRandom.nextInt(900000) + 100000
