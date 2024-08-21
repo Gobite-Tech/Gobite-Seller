@@ -14,10 +14,11 @@ import android.view.ViewTreeObserver
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.amulyakhare.textdrawable.TextDrawable
+//import com.amulyakhare.textdrawable.TextDrawable
 import com.example.gobiteseller.R
 import com.example.gobiteseller.data.local.PreferencesHelper
 import com.example.gobiteseller.data.local.Resource
@@ -92,15 +93,15 @@ class HomeActivity : AppCompatActivity() {
         }else{
             e("updateHeaderLayoutUI",preferencesHelper.name.toString())
             headerLayout.textCustomerName.text = preferencesHelper.name.toString()
-//            headerLayout.textEmail.text = preferencesHelper.email.toString()
-            val textDrawable = TextDrawable.builder()
-                .buildRound(
-                    preferencesHelper.name?.get(0).toString().capitalize(),
-                    ContextCompat.getColor(this, R.color.colorAccent)
-                )
+            headerLayout.textEmail.text = preferencesHelper.email.toString()
+//            val textDrawable = TextDrawable.builder()
+//                .buildRound(
+//                    preferencesHelper.name?.get(0).toString().capitalize(),
+//                    ContextCompat.getColor(this, R.color.colorAccent)
+//                )
 
 
-            headerLayout.imageProfilePic.setImageDrawable(textDrawable)
+            headerLayout.imageProfilePic.setImageDrawable(R.drawable.ic_shop.toDrawable())
         }
 
 
@@ -118,8 +119,8 @@ class HomeActivity : AppCompatActivity() {
 
         var fragment: Fragment
         binding.tabs.visibility = View.VISIBLE
+        binding.tabs.selectTab(binding.tabs.getTabAt(0))
         fragment = NewOrdersFragment()
-
 
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(
@@ -442,18 +443,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-
-
-//        initView()
-//        getShopDetails()
-        if(AppConstants.update_hua==1){
-            AppConstants.update_hua=0
-            getShopDetails()
-            e("resume","hua")
-        }
-        binding.textShopName.text=preferencesHelper.name
-        updateHeaderLayoutUI()
-
+        getShopDetails()
 
     }
 

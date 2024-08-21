@@ -97,8 +97,8 @@ class NewOrdersFragment : Fragment() {
                             showEmptyStateAnimation()
                         else{
                             binding.layoutStates.visibility = View.GONE
-                            binding.animationView.visibility = View.GONE
-                            binding.animationView.cancelAnimation()
+//                            binding.animationView.visibility = View.GONE
+//                            binding.animationView.cancelAnimation()
                             errorSnackBar.dismiss()
                         }
                     }
@@ -106,10 +106,10 @@ class NewOrdersFragment : Fragment() {
                     Resource.Status.ERROR -> {
                         binding.swipeRefreshLayout.isRefreshing = false
                         binding.layoutStates.visibility = View.GONE
-                        binding.animationView.visibility = View.VISIBLE
-                        binding.animationView.loop(true)
-                        binding.animationView.setAnimation("order_failed_animation.json")
-                        binding.animationView.playAnimation()
+//                        binding.animationView.visibility = View.VISIBLE
+//                        binding.animationView.loop(true)
+//                        binding.animationView.setAnimation("order_failed_animation.json")
+//                        binding.animationView.playAnimation()
                         errorSnackBar.setText("Something went wrong")
                         ordersList.clear()
                         orderAdapter.notifyDataSetChanged()
@@ -121,7 +121,7 @@ class NewOrdersFragment : Fragment() {
                         orderAdapter.notifyDataSetChanged()
                         if (!binding.swipeRefreshLayout.isRefreshing) {
                             binding.layoutStates.visibility = View.VISIBLE
-                            binding.animationView.visibility = View.GONE
+//                            binding.animationView.visibility = View.GONE
                         }
                         errorSnackBar.dismiss()
                     }
@@ -129,11 +129,11 @@ class NewOrdersFragment : Fragment() {
                     Resource.Status.OFFLINE_ERROR -> {
                         binding.swipeRefreshLayout.isRefreshing = false
                         binding.layoutStates.visibility = View.GONE
-                        binding.animationView.visibility = View.VISIBLE
-                        binding.animationView.loop(true)
-                        binding.animationView.setAnimation("no_internet_connection_animation.json")
-                        binding.animationView.playAnimation()
-                        errorSnackBar.setText("No Internet Connection")
+//                        binding.animationView.visibility = View.VISIBLE
+//                        binding.animationView.loop(true)
+//                        binding.animationView.setAnimation("no_internet_connection_animation.json")
+//                        binding.animationView.playAnimation()
+//                        errorSnackBar.setText("No Internet Connection")
                         ordersList.clear()
                         orderAdapter.notifyDataSetChanged()
                         Handler().postDelayed({ errorSnackBar.show() }, 500)

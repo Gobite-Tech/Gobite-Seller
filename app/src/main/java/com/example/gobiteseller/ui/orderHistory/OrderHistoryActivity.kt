@@ -25,7 +25,7 @@ import com.example.gobiteseller.ui.orderdetails.OrderDetailActivity
 import com.example.gobiteseller.utils.AppConstants
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
-import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
+//import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import org.koin.android.ext.android.inject
 
 class OrderHistoryActivity : AppCompatActivity() {
@@ -90,7 +90,7 @@ class OrderHistoryActivity : AppCompatActivity() {
         })
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerShops.layoutManager = layoutManager
-        binding.recyclerShops.adapter = AlphaInAnimationAdapter(orderAdapter)
+        binding.recyclerShops.adapter = orderAdapter
 
 
         binding.recyclerShops.addOnScrollListener(object : RecyclerView.OnScrollListener() {

@@ -164,18 +164,18 @@ class MenuActivity : AppCompatActivity() {
                             }
                             categoryAdapter.notifyDataSetChanged()
                             binding.layoutStates.visibility = View.GONE
-                            binding.animationView.visibility = View.GONE
-                            binding.animationView.cancelAnimation()
+//                            binding.animationView.visibility = View.GONE
+//                            binding.animationView.cancelAnimation()
                             errorSnackBar.dismiss()
                         }
                     }
 
                     Resource.Status.ERROR -> {
                         binding.layoutStates.visibility = View.GONE
-                        binding.animationView.visibility = View.VISIBLE
-                        binding.animationView.loop(true)
-                        binding.animationView.setAnimation("order_failed_animation.json")
-                        binding.animationView.playAnimation()
+//                        binding.animationView.visibility = View.VISIBLE
+//                        binding.animationView.loop(true)
+//                        binding.animationView.setAnimation("order_failed_animation.json")
+//                        binding.animationView.playAnimation()
                         errorSnackBar.setText("Something went wrong")
                         Handler().postDelayed({ errorSnackBar.show() }, 500)
                     }
@@ -184,26 +184,26 @@ class MenuActivity : AppCompatActivity() {
                         categoryItemList.clear()
                         categoryAdapter.notifyDataSetChanged()
                         binding.layoutStates.visibility = View.VISIBLE
-                        binding.animationView.visibility = View.GONE
+//                        binding.animationView.visibility = View.GONE
                         errorSnackBar.dismiss()
                     }
 
                     Resource.Status.OFFLINE_ERROR -> {
                         binding.layoutStates.visibility = View.GONE
-                        binding.animationView.visibility = View.VISIBLE
-                        binding.animationView.loop(true)
-                        binding.animationView.setAnimation("no_internet_connection_animation.json")
-                        binding.animationView.playAnimation()
+//                        binding.animationView.visibility = View.VISIBLE
+//                        binding.animationView.loop(true)
+//                        binding.animationView.setAnimation("no_internet_connection_animation.json")
+//                        binding.animationView.playAnimation()
                         errorSnackBar.setText("No Internet Connection")
                         Handler().postDelayed({ errorSnackBar.show() }, 500)
                     }
 
                     Resource.Status.EMPTY -> {
                         binding.layoutStates.visibility = View.GONE
-                        binding.animationView.visibility = View.VISIBLE
-                        binding.animationView.loop(true)
-                        binding.animationView.setAnimation("empty_animation.json")
-                        binding.animationView.playAnimation()
+//                        binding.animationView.visibility = View.VISIBLE
+//                        binding.animationView.loop(true)
+//                        binding.animationView.setAnimation("empty_animation.json")
+//                        binding.animationView.playAnimation()
                         errorSnackBar.setText("No Orders available")
                         Handler().postDelayed({ errorSnackBar.show() }, 500)
                     }

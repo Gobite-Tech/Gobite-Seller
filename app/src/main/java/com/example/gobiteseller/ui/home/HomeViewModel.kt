@@ -56,7 +56,7 @@ class HomeViewModel(private val shopRepository: ShopRepository,private val order
         viewModelScope.launch {
             try {
                 performShop.value = Resource.loading()
-                val response = shopRepository.getShopsNew()
+                val response = shopRepository.getShop()
                 performShop.value = Resource.success(response.body()!!)
             }catch (e:Exception){
                 if (e is UnknownHostException) {

@@ -71,7 +71,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.buttonLogin.setOnClickListener {
-            loginRequest()
+//            loginRequest()
+            viewModel.Login(LoginRequest("gupta@gmail.com","12345678"))
         }
     }
 
@@ -208,57 +209,57 @@ class LoginActivity : AppCompatActivity() {
 
 
         //Login
-//        viewModel.performLoginStatus.observe(this, Observer { resource ->
-//            if (resource != null) {
-//                when (resource.status) {
-//                    Resource.Status.SUCCESS -> {
-//                        if (resource.data != null) {
-//                            val loginresult = resource.data
-//
-//                            Log.e(
-//                                "lgin ka",
-//                                " Result - ${resource.data} and ${resource.data.success} and ${resource.data.message}"
-//                            )
-//
-//                            preferencesHelper.oauthId = loginresult.data.token
-//                            preferencesHelper.mobile= binding.editPhone.text.toString()
-//                            e("lgn token:", preferencesHelper.mobile!!)
-//
-//                            Toast.makeText(applicationContext,"Welcome!!",Toast.LENGTH_SHORT).show()
-//                            startActivity(Intent(applicationContext, HomeActivity::class.java))
-//                            finish()
-//
-//                            progressDialog.dismiss()
-//
-//                        } else {
-//                            Toast.makeText(
-//                                applicationContext,
-//                                "Something went wrong data khali",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                        }
-//                    }
-//                    Resource.Status.OFFLINE_ERROR -> {
-//                        progressDialog.dismiss()
-//                        Toast.makeText(
-//                            applicationContext,
-//                            "No Internet Connection",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
-//                    Resource.Status.ERROR -> {
-//                        progressDialog.dismiss()
-//                        Toast.makeText(applicationContext, "User not found\n Sign Up first", Toast.LENGTH_SHORT).show()
-//                        val intent= Intent(this,SignUpActivity::class.java)
-//                        startActivity(intent)
-//                    }
-//                    Resource.Status.LOADING -> {
-//                        progressDialog.setMessage("Logging in...")
-//                        progressDialog.show()
-//                    }
-//                    else -> {}
-//                }
-//            }
-//        })
+        viewModel.performLoginStatus.observe(this, Observer { resource ->
+            if (resource != null) {
+                when (resource.status) {
+                    Resource.Status.SUCCESS -> {
+                        if (resource.data != null) {
+                            val loginresult = resource.data
+
+                            Log.e(
+                                "lgin ka",
+                                " Result - ${resource.data} and ${resource.data.success} and ${resource.data.message}"
+                            )
+
+                            preferencesHelper.oauthId = loginresult.data.token
+                            preferencesHelper.mobile= binding.editPhone.text.toString()
+                            e("lgn token:", preferencesHelper.mobile!!)
+
+                            Toast.makeText(applicationContext,"Welcome!!",Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(applicationContext, HomeActivity::class.java))
+                            finish()
+
+                            progressDialog.dismiss()
+
+                        } else {
+                            Toast.makeText(
+                                applicationContext,
+                                "Something went wrong data khali",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                    Resource.Status.OFFLINE_ERROR -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(
+                            applicationContext,
+                            "No Internet Connection",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    Resource.Status.ERROR -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(applicationContext, "User not found\n Sign Up first", Toast.LENGTH_SHORT).show()
+                        val intent= Intent(this,SignUpActivity::class.java)
+                        startActivity(intent)
+                    }
+                    Resource.Status.LOADING -> {
+                        progressDialog.setMessage("Logging in...")
+                        progressDialog.show()
+                    }
+                    else -> {}
+                }
+            }
+        })
     }
 }

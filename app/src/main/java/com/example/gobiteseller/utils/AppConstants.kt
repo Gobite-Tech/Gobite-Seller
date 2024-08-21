@@ -2,7 +2,7 @@ package com.example.gobiteseller.utils
 
 
 object AppConstants {
-    const val CUSTOM_BASE_URL="http://65.2.132.216/admin/"
+    const val CUSTOM_BASE_URL="http://192.168.137.1/admin/"
     const val PREFS_AUTH_TOKEN = "auth_token"
     const val PREFS_LOGIN_PREFS = "loginPrefs"
     const val PREFS_CUSTOMER = "customer"

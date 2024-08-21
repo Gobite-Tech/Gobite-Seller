@@ -99,7 +99,7 @@ class OTPActivity : AppCompatActivity() {
                     .isNotEmpty() && binding.editOtp.text.toString().length == 6
             ) {
                 if(binding.editOtp.text.toString() == otp){
-                    viewModel.Login(LoginRequest(email!!,"12345678"))
+//                    viewModel.Login(LoginRequest(email!!,"12345678"))
                 }else{
                     Toast.makeText(this,"Invalid OTP",Toast.LENGTH_SHORT).show()
                 }

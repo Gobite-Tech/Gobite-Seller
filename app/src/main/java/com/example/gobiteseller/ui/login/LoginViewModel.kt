@@ -26,7 +26,9 @@ class LoginViewModel(private val userRepository: UserRespository): ViewModel() {
             try {
                 performLogin.value = Resource.loading()
                 val response = userRepository.loginNew(loginRequestNew)
+                e("login response", "${response.body()}")
                 performLogin.value = Resource.success(response.body()!!)
+                e("login response", "${performLogin.value}")
             } catch (e: Exception) {
                 e("login failed" ,"${e.message}")
                 if (e is UnknownHostException) {

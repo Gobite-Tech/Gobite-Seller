@@ -82,18 +82,18 @@ class ReadyFragment : Fragment() {
                         showEmptyStateAnimation()
                     } else {
                         binding.layoutStates.visibility = View.GONE
-                        binding.animationView.visibility = View.GONE
-                        binding.animationView.cancelAnimation()
+//                        binding.animationView.visibility = View.GONE
+//                        binding.animationView.cancelAnimation()
                         errorSnackBar.dismiss()
                     }
                 }
                 Resource.Status.ERROR -> {
                     binding.swipeRefreshLayout.isRefreshing = false
                     binding.layoutStates.visibility = View.GONE
-                    binding.animationView.visibility = View.VISIBLE
-                    binding.animationView.loop(true)
-                    binding.animationView.setAnimation("order_failed_animation.json")
-                    binding.animationView.playAnimation()
+//                    binding.animationView.visibility = View.VISIBLE
+//                    binding.animationView.loop(true)
+//                    binding.animationView.setAnimation("order_failed_animation.json")
+//                    binding.animationView.playAnimation()
                     ordersList.clear()
                     orderAdapter.notifyDataSetChanged()
                     errorSnackBar.setText("Error: " + resource.message)
@@ -107,7 +107,7 @@ class ReadyFragment : Fragment() {
                     orderAdapter.notifyDataSetChanged()
                     if (!binding.swipeRefreshLayout.isRefreshing) {
                         binding.layoutStates.visibility = View.VISIBLE
-                        binding.animationView.visibility = View.GONE
+//                        binding.animationView.visibility = View.GONE
                     }
                     errorSnackBar.dismiss()
                 }
